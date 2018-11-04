@@ -1,7 +1,7 @@
 package br.ufjf.dcc078.Servlet;
 
 import br.ufjf.dcc078.Dominio.ListaDePedidos;
-import br.ufjf.dcc078.Dominio.Pedido;
+import br.ufjf.dcc078.Strategy.Pedido;
 import br.ufjf.dcc078.Dominio.Produto;
 import java.io.IOException;
 import java.util.List;

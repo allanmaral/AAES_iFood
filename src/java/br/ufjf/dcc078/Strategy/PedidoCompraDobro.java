@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufjf.dcc078.strategy;
+package br.ufjf.dcc078.Strategy;
 
 /**
  *
  * @author douglas
  */
-public class PedidoFreteGratis extends Pedido{
+public class PedidoCompraDobro extends Pedido{
 
-    public PedidoFreteGratis() {
-        this.nome = "Pedido Frete Grátis";
-        this.promocao = new FreteGratis();
+    public PedidoCompraDobro() {
+        this.nome = "Pedido em Compra Dobro";
+        this.promocao = new CompraDobro();
     }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufjf.dcc078.strategy;
+package br.ufjf.dcc078.Strategy;
 
 /**
  *
