@@ -36,7 +36,7 @@ public class PedidoDAO {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("insert into pedido(id_usuario, titulo, descricao, status, promocao) " + 
-                    "values('" + pedido.getUsuario()+ "','" + pedido.getTitulo()+ "', '"+pedido.getDescricao()+"', '"+pedido.getStatus()+"', '"+pedido.getPromocao()+"')");
+                    "values('" + pedido.getUsuario().getId()+ "','" + pedido.getTitulo()+ "', '"+pedido.getDescricao()+"', '"+pedido.getStatus()+"', '"+pedido.getPromocao()+"')");
         }
         catch (SQLException e) 
         {
