@@ -5,9 +5,8 @@ package br.ufjf.dcc078.Dominio;
  * @author douglas
  */
 public class Produto {
-
     String nome;
-    Integer quantidade;
+    Integer quantidade;    
     Double preco;
 
     public Produto(String nome, Integer quantidade, Double preco) {
@@ -15,6 +14,7 @@ public class Produto {
         this.quantidade = quantidade;
         this.preco = preco;
     }
+    
 
     public Produto(String nome) {
         this.nome = nome;
@@ -36,6 +36,7 @@ public class Produto {
         this.preco = preco;
     }
 
+    
     public String getNome() {
         return nome;
     }
@@ -48,5 +49,6 @@ public class Produto {
     public String toString() {
         return "produtos{" + "nome=" + nome + '}';
     }
-
+    
+    
 }
