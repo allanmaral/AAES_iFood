@@ -9,7 +9,7 @@ package br.ufjf.dcc078.strategy;
  *
  * @author ice
  */
-public abstract class Pedido {
+public abstract class AplicaPromocao {
     
  protected Promocao promocao;
     protected String nome;

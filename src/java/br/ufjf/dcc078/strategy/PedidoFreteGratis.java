@@ -9,7 +9,7 @@ package br.ufjf.dcc078.strategy;
  *
  * @author douglas
  */
-public class PedidoFreteGratis extends Pedido{
+public class PedidoFreteGratis extends AplicaPromocao{
 
     public PedidoFreteGratis() {
         this.nome = "Pedido Frete Grátis";
