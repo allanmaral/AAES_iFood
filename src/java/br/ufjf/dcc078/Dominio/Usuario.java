@@ -5,11 +5,14 @@
  */
 package br.ufjf.dcc078.Dominio;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author douglas
  */
-public class Usuario {
+public class Usuario implements Observer{
     private Integer id;
     private String nomeCompleto;
     private String nomeUsuario;
@@ -64,7 +67,9 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
-    
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    } 
 }

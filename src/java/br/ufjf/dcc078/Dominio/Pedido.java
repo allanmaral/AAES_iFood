@@ -1,12 +1,16 @@
 package br.ufjf.dcc078.Dominio;
 
+import br.ufjf.dcc078.Memento.MementoPedido;
+import br.ufjf.dcc078.State.EstadoPedido;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public class Pedido {
-
+public class Pedido extends Observable {
+            
+    EstadoPedido estado;
     private List<Produto> lista = new ArrayList<>();
     private Usuario usuario;
     private String titulo;
@@ -79,8 +83,6 @@ public class Pedido {
         this.promocao = promocao;
     }
     
-    
-
     public Double getTotal() {
         Double total = 0.0;
 
@@ -88,5 +90,43 @@ public class Pedido {
             total += lista.get(i).getQuantidade() * lista.get(i).getPreco();
         }
         return total;
+    }
+    
+    public EstadoPedido getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPedido estado) {
+        this.estado = estado;
+        setChanged();
+        notifyObservers();
+    }
+    
+    public void aguardarConfirmacao(){
+        this.getEstado().aguardarConfirmacao(this);
+    }
+    
+    public void colocarEmProducao(){
+        this.getEstado().colocarEmProducao(this);
+    }
+    
+    public void encaminhar(){
+        this.getEstado().encaminhar(this);
+    }
+    
+    public void entregar(){
+        this.getEstado().entregar(this);
+    }
+    
+    public void cancelar(){
+        this.getEstado().cancelar(this);
+    }
+    
+    public MementoPedido save(){
+         return new MementoPedido(this.estado);
+    }
+    
+    public void restore(MementoPedido m){
+        this.estado = m.getEstadoPedido();
     }
 }
