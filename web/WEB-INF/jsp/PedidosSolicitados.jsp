@@ -18,6 +18,8 @@
         <th>Itens Solicitados</th>
         <th>Add Produto</th>
         <th>Fechar Pedido</th>  
+        
+        
             <%
                 int i = 0;
                 for (Pedido pedido : (List<Pedido>) request.getAttribute("pedido")) {
@@ -29,7 +31,7 @@
             <td><label>R$:<%=pedido.getTotal()%></label></td>    
             <td><a href="">Visualizar</a></td>
             <td><a href="">Adicionar</a></td>
-            <td><a href=""><label>Fechar Pedido</label></a></td>
+            <td><a href=""><label>Finalizar Pedido</label></a></td>
         </tr>
         <%
                 i++;

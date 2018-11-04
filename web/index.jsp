@@ -3,13 +3,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pedidos</title>
+        <title>Controle de Pedidos</title>
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/colour.css">
         <link rel="stylesheet" href="css/template.css">
     </head>
     <body>
-        <h1>Ifood</h1>
+        <h1>IFOOD</h1>
         <a href="ControlePedidos.html">Entrar</a>
     </body>
 </html>
