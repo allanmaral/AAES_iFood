@@ -6,20 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
-        
-    Boolean situacao;
-    Time horarioAbertura;
-    Time horarioEncerramento;
-    List<Produto> lista = new ArrayList<>();
-    static final Boolean PEDIDOENCERRADO = false;
-    static final Boolean PEDIDOABERTO = true;
-    
-    public Pedido() {            
-        this.situacao = PEDIDOABERTO;
-        horarioAbertura = Time.valueOf(LocalTime.now());
-        horarioEncerramento = null;
+
+    private List<Produto> lista = new ArrayList<>();
+    private Usuario usuario;
+    private String titulo;
+    private String descricao;
+    private String status;
+    private String promocao;
+
+    public Pedido() {
     }
 
+    
+    public Pedido(Usuario usuario, String titulo, String descricao, String status, String promocao) {
+        this.usuario = usuario;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.status = status;
+        this.promocao = promocao;
+    }
+
+    
     public void addLista(Produto p) {
         this.lista.add(p);
     }
@@ -32,26 +39,47 @@ public class Pedido {
         this.lista = lista;
     }
 
-    public void setSituacao(Boolean situacao) {
-        this.situacao = situacao;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public Time getHorarioAbertura() {
-        return horarioAbertura;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public Time getHorarioEncerramento() {
-        return horarioEncerramento;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public Boolean getSituacao() {
-        return situacao;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public void encerrarPedidoNow() {
-        this.horarioEncerramento = Time.valueOf(LocalTime.now()); //w35q horário de encerramento com base no horário atual        
-        this.situacao = PEDIDOENCERRADO; //altera situação pedido para false(encerrado);
+    public String getDescricao() {
+        return descricao;
     }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPromocao() {
+        return promocao;
+    }
+
+    public void setPromocao(String promocao) {
+        this.promocao = promocao;
+    }
+    
+    
 
     public Double getTotal() {
         Double total = 0.0;
