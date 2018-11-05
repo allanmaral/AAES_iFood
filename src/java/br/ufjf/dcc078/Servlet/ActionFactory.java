@@ -12,9 +12,9 @@ package br.ufjf.dcc078.Servlet;
 public class ActionFactory {
     public static Action create(String action) {
         Action actionObject = null;
-        String nomeClasse = "br.ufjf.dcc078.Servlet." + action + "Action";
         Class classe = null;
         Object objeto = null;
+        String nomeClasse = "br.ufjf.dcc078.Action." + action + "Action";
         
         try {
             classe = Class.forName(nomeClasse);

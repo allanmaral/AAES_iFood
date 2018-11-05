@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufjf.dcc078.Servlet;
+package br.ufjf.dcc078.Action;
 
-import br.ufjf.dcc078.Dominio.ListaDePedidos;
-import br.ufjf.dcc078.Dominio.Pedido;
+import br.ufjf.dcc078.Dominio.ListaDeProdutos;
 import br.ufjf.dcc078.Dominio.Produto;
+import br.ufjf.dcc078.Servlet.Action;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -19,17 +19,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author allan
  */
-public class ControlePedidosAction implements Action{
+public class ListarProdutosAction implements Action{
 
     private RequestDispatcher despachante;
-    private List<Pedido> pedidos = new ListaDePedidos().getInstance();    
-    private List<Produto> produto;
-    private Pedido pedido;
+    private final List<Produto> produtos = ListaDeProdutos.getInstance();
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
-        request.setAttribute("pedido", pedidos);
-        despachante = request.getRequestDispatcher("WEB-INF/jsp/PedidosSolicitados.jsp");
+        /* ESSE É UM CÓDIGO TEMPORARIO
+         * QUANDO A ESTRUTURA DE BANCO DE DADOS ESTIVER BEM DEFINIDA, AQUI VIRÁ
+         * A BUSCA DE PRODUTOS QUE O CLIETE PODE COLOCAR EM SEU CARRINHO
+         */
+        
+        request.setAttribute("produtos", produtos);
+        despachante = request.getRequestDispatcher("WEB-INF/jsp/ProdutosListados.jsp");
         despachante.forward(request, response);
     }
     

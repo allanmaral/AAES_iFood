@@ -10,6 +10,6 @@
     </head>
     <body>
         <h1>IFOOD</h1>
-        <a href="ControlePedidos.html">Entrar</a>
+        <a href="FrontController?action=ControlePedidos">Entrar</a>
     </body>
 </html>
