@@ -22,4 +22,6 @@ public interface EstadoPedido {
     public void entregar(Pedido pedido);
     
     public void cancelar(Pedido pedido);
+    
+    public String getNome();
 }

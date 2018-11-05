@@ -17,8 +17,8 @@ public class ControleServlet extends HttpServlet {
 
     private RequestDispatcher despachante;
     private List<Pedido> pedidos = new ListaDePedidos().getInstance();    
-    private List<Produto> produto;
-    private Pedido pedido;
+    //private List<Produto> produto;
+    //private Pedido pedido;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +35,7 @@ public class ControleServlet extends HttpServlet {
     }
 
     public void doGetControlePedidos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("pedido", pedidos);
+        request.setAttribute("pedidos", pedidos);
         despachante = request.getRequestDispatcher("WEB-INF/jsp/PedidosSolicitados.jsp");
         despachante.forward(request, response);
     }

@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="br.ufjf.dcc078.Dominio.Pedido"%>
 <%@page import="java.util.List"%>
 <%@page import="br.ufjf.dcc078.Dominio.Produto"%>
@@ -19,24 +20,24 @@
         <th>Add Produto</th>
         <th>Fechar Pedido</th>  
         
-        
-            <%
-                int i = 0;
-                for (Pedido pedido : (List<Pedido>) request.getAttribute("pedido")) {
-            %>  
-        <tr>                            
-            <td><%=((pedido.getSituacao()) ? "Aberto" : "Fechado")%></a></td>            
-            <td><%=pedido.getHorarioAbertura()%></td>
-            <td><%=pedido.getHorarioEncerramento()%></td>  
-            <td><label>R$:<%=pedido.getTotal()%></label></td>    
-            <td><a href="">Visualizar</a></td>
-            <td><a href="">Adicionar</a></td>
-            <td><a href=""><label>Finalizar Pedido</label></a></td>
-        </tr>
-        <%
-                i++;
-            }
-        %>        
+        <c:choose>
+            <c:when test="${not empty pedidos}">
+                <c:forEach var="pedido" items="${pedidos}">
+                    <tr>                            
+                        <td><c:out value="${pedido.getEstado().getNome()}"/></td>            
+                        <td>Horario de abertura</td>
+                        <td>Horario de Encerramento</td>  
+                        <td><label>R$ <c:out value="${pedido.getTotal()}"/></label></td>    
+                        <td><a href="">Visualizar</a></td>
+                        <td><a href="">Adicionar</a></td>
+                        <td><a href=""><label>Finalizar Pedido</label></a></td>
+                    </tr>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                
+            </c:otherwise>
+        </c:choose>
     </table><br>
     
 </div>

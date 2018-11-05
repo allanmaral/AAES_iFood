@@ -39,4 +39,9 @@ public class PedidoEntregue implements EstadoPedido{
         System.out.println("Não é possível alcançar o estado.");
     }
     
+    @Override
+    public String getNome() {
+        return "Entregue";
+    }
+    
 }

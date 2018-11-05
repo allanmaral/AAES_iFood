@@ -38,5 +38,10 @@ public class PedidoAguardandoConfirmacao implements EstadoPedido{
     public void cancelar(Pedido pedido) {
         pedido.setEstado(new PedidoCancelado());
     }
+
+    @Override
+    public String getNome() {
+        return "Aguardando Confirmação";
+    }
     
 }

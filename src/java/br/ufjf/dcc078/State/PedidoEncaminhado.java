@@ -39,4 +39,9 @@ public class PedidoEncaminhado implements EstadoPedido{
         pedido.setEstado(new PedidoCancelado());
     }
     
+    @Override
+    public String getNome() {
+        return "Encaminhado";
+    }
+    
 }

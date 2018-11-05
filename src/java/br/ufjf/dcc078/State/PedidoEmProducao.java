@@ -39,4 +39,9 @@ public class PedidoEmProducao implements EstadoPedido{
         pedido.setEstado(new PedidoCancelado());
     }
     
+    @Override
+    public String getNome() {
+        return "Em Produção";
+    }
+    
 }

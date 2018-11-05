@@ -39,4 +39,8 @@ public class PedidoCancelado implements EstadoPedido{
         pedido.setEstado(new PedidoCancelado());
     }
     
+    @Override
+    public String getNome() {
+        return "Cancelado";
+    }
 }
