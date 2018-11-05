@@ -1,53 +1,45 @@
 package br.ufjf.dcc078.Dominio;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  *
  * @author douglas
  */
-public class Produto {
-    String nome;
-    Integer quantidade;    
-    Double preco;
-
+public class Produto extends Componente {
+    
+    private ArrayList<Componente> componentes;
+    
+    public Produto()
+    {
+        this.componentes = new ArrayList<>();
+    }
+    
     public Produto(String nome, Integer quantidade, Double preco) {
         this.nome = nome;
         this.quantidade = quantidade;
         this.preco = preco;
+        this.componentes = new ArrayList<>();
     }
     
-
-    public Produto(String nome) {
-        this.nome = nome;
+    public void adicionarComponente(Componente componente)
+    {
+        this.componentes.add(componente);
     }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
     
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     @Override
     public String toString() {
         return "produtos{" + "nome=" + nome + '}';
+    }
+
+    @Override
+    public Double getPrecoTotal() {
+        Double precoTotal = getQuantidade() * getPreco();
+        for(Iterator<Componente> it = componentes.iterator(); it.hasNext(); ) {
+            precoTotal += it.next().getPrecoTotal();
+        }
+        return precoTotal;
     }
     
     
