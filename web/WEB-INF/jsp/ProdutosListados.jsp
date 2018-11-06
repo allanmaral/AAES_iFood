@@ -25,11 +25,11 @@
                 <c:choose>
                     <c:when test="${not empty produtos}">
                         <c:forEach var="produto" items="${produtos}">
-                            <a class="unlink" href="">
+                            <a class="unlink" href="FrontController?action=DetalhesProduto&idPdt=12345">
                                 <div class="border-top">
                                     <br>
                                     <h4><c:out value="${produto.getNome()}"/></h4>
-                                    <p>Uma descrição para o item vem aqui</p>    
+                                    <p><c:out value="${produto.getDescricao()}"/></p>    
                                     <label class="text-success">R$ <c:out value="${produto.getPreco()}"/></label><br>
                                 </div><br>
                             </a>

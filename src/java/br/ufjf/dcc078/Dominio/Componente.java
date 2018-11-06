@@ -11,6 +11,7 @@ package br.ufjf.dcc078.Dominio;
  */
 public abstract class Componente {
     protected String nome;
+    protected String descricao;
     protected Integer quantidade;    
     protected Double preco;
 
@@ -29,6 +30,15 @@ public abstract class Componente {
 
     public Componente setNome(String nome) {
         this.nome = nome;
+        return this;
+    }
+    
+    public String getDescricao() {
+        return descricao;
+    }
+    
+    public Componente setDescricao(String descricao) {
+        this.descricao = descricao;
         return this;
     }
 
