@@ -5,8 +5,8 @@
  */
 package br.ufjf.dcc078.Persistencia;
 
-import br.ufjf.dcc078.Dominio.Pedido;
-import br.ufjf.dcc078.Dominio.Usuario;
+import br.ufjf.dcc078.Modelo.Pedido;
+import br.ufjf.dcc078.Modelo.Usuario;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

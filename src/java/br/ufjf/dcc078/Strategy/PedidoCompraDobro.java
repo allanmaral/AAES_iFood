@@ -12,7 +12,6 @@ package br.ufjf.dcc078.Strategy;
 public class PedidoCompraDobro extends AplicarPromocao{
 
     public PedidoCompraDobro() {
-        this.nome = "Pedido em Compra Dobro";
         this.promocao = new CompraDobro();
     }
     

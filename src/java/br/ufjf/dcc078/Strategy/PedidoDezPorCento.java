@@ -9,11 +9,10 @@ package br.ufjf.dcc078.Strategy;
  *
  * @author douglas
  */
-public class PedidoFreteGratis extends AplicarPromocao{
+public class PedidoDezPorCento extends AplicarPromocao{
 
-    public PedidoFreteGratis() {
-        this.nome = "Pedido Frete Grátis";
-        this.promocao = new FreteGratis();
+    public PedidoDezPorCento() {
+        this.promocao = new DezPorCento();
     }
     
 }

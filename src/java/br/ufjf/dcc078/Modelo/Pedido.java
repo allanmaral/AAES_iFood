@@ -1,8 +1,9 @@
-package br.ufjf.dcc078.Dominio;
+package br.ufjf.dcc078.Modelo;
 
 import br.ufjf.dcc078.Memento.MementoPedido;
 import br.ufjf.dcc078.State.EstadoPedido;
 import br.ufjf.dcc078.State.PedidoAguardandoConfirmacao;
+import br.ufjf.dcc078.Strategy.Promocao;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -17,14 +18,14 @@ public class Pedido extends Observable {
     private String titulo;
     private String descricao;
     private String status;
-    private String promocao;
+    private Promocao promocao;
 
     public Pedido() {
         this.estado = new PedidoAguardandoConfirmacao();
     }
 
     
-    public Pedido(Usuario usuario, String titulo, String descricao, String status, String promocao) {
+    public Pedido(Usuario usuario, String titulo, String descricao, String status, Promocao promocao) {
         this.usuario = usuario;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -70,11 +71,11 @@ public class Pedido extends Observable {
         this.status = status;
     }
 
-    public String getPromocao() {
+    public Promocao getPromocao() {
         return promocao;
     }
 
-    public void setPromocao(String promocao) {
+    public void setPromocao(Promocao promocao) {
         this.promocao = promocao;
     }
     
@@ -84,6 +85,10 @@ public class Pedido extends Observable {
         for (int i = 0; i < lista.size(); i++) {
             total += lista.get(i).getQuantidade() * lista.get(i).getPreco();
         }
+        
+        if(getPromocao() == null)
+            total *= getPromocao().obterDesconto();
+        
         return total;
     }
     

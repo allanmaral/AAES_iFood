@@ -1,4 +1,4 @@
-package br.ufjf.dcc078.Dominio;
+package br.ufjf.dcc078.Modelo;
 
 import java.util.ArrayList;
 import java.util.Iterator;

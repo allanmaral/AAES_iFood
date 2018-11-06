@@ -5,9 +5,9 @@
  */
 package br.ufjf.dcc078.Action;
 
-import br.ufjf.dcc078.Dominio.Adicional;
-import br.ufjf.dcc078.Dominio.ListaDeProdutos;
-import br.ufjf.dcc078.Dominio.Produto;
+import br.ufjf.dcc078.Modelo.Adicional;
+import br.ufjf.dcc078.Modelo.ListaDeProdutos;
+import br.ufjf.dcc078.Modelo.Produto;
 import br.ufjf.dcc078.Servlet.Action;
 import java.io.IOException;
 import java.util.List;
