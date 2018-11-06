@@ -14,7 +14,7 @@
 
 <div class="container" style="margin-top:30px">
     <div class="text-center">
-        <h2>Detalhes</h2><br>
+        <h2>Pedido</h2><br>
     </div>
     
     <div class="container">
@@ -23,14 +23,46 @@
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
                 <c:choose>
-                    <c:when test="${not empty produto}">
+                    <c:when test="${not empty pedido}">
                         <div class="border-top border-bottom">
                             <br>
-                            <h4><c:out value="${produto.getNome()}"/></h4>
-                            <p><c:out value="${produto.getDescricao()}"/></p>    
-                            <label class="text-success">R$ <c:out value="${produto.getPreco()}"/></label><br>
-                        
-                            <div class="col-lg-12">
+                            <h4><c:out value="${pedido.getTitulo()}"/></h4>
+                            <c:choose>
+                                <c:when test="${idPedido != -1}">
+                                    <label>Status do pedido: </label>
+                                    <label class="text-danger"><c:out value="${pedido.getEstado().getNome()}"/></label>
+                                    <br>
+                                </c:when>
+                            </c:choose>
+         
+                            <label>Preço total: </label>
+                            <label class="text-success">R$ <c:out value="${pedido.getTotal()}"/></label><br>
+                            <br>
+                            <h5>Conteudo do Pedido</h5>
+                            <c:forEach var="prd" items="${pedido.getLista()}">
+                                <div class="form-group row">
+                                    <a class="unlink col-lg-1" href=""> 
+                                        <i class="glyphicon glyphicon-check"></i>
+                                    </a>
+                                    <label class="control-label col-lg-7"><c:out value="${prd.getNome()}"/></label>
+                                    <label class="text-danger control-label col-lg-2">R$ <c:out value="${prd.getPreco()}"/></label>
+                                    <div class="col-lg-2">
+                                        <input type="number" class="form-control" name="quantidade" value='<c:out value="${prd.getQuantidade()}"/>' />
+                                    </div>
+                                </div>
+                            </c:forEach>
+                            
+                            <c:choose>
+                                <c:when test="${idPedido == -1}">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">
+                                            Finalizar Compra    
+                                        </button>
+                                    </div><br>
+                                </c:when>
+                            </c:choose>
+                            
+                            <%--<div class="col-lg-12">
                                 <form class="form-horizontal" action="FrontController?action=AdicionarProduto" method="post">
                                     <c:forEach var="prd" items="${produto.getComponentes()}">
                                         <div class="form-group row">
@@ -58,7 +90,7 @@
                                         </div>
                                     </div><br>
                                 </form>
-                            </div>
+                            </div>--%>
                         </div><br>
                     </c:when>
                     <c:otherwise>

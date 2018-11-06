@@ -1,8 +1,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="br.ufjf.dcc078.Dominio.Pedido"%>
+<%@page import="br.ufjf.dcc078.Modelo.Pedido"%>
 <%@page import="java.util.List"%>
-<%@page import="br.ufjf.dcc078.Dominio.Produto"%>
+<%@page import="br.ufjf.dcc078.Modelo.Produto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="../jspf/cabecalho.jspf" %>
@@ -28,7 +28,7 @@
                         <td>Horario de abertura</td>
                         <td>Horario de Encerramento</td>  
                         <td><label>R$ <c:out value="${pedido.getTotal()}"/></label></td>    
-                        <td><a href="">Visualizar</a></td>
+                        <td><a href="FrontController?action=ExibirPedido&id=0">Visualizar</a></td>
                         <td><a href="">Adicionar</a></td>
                         <td><a href=""><label>Finalizar Pedido</label></a></td>
                     </tr>

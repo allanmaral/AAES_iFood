@@ -41,7 +41,6 @@ public class PedidoDAO {
                     + "values('"
                     + pedido.getUsuario().getId() + "','"
                     + pedido.getTitulo() + "', '"
-                    + pedido.getDescricao() + "', '"
                     + pedido.getStatus() + "', '"
                     + pedido.getPromocao() + "')"
             );

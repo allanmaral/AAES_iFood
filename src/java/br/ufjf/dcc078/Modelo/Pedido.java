@@ -63,14 +63,6 @@ public class Pedido extends Observable {
         this.titulo = titulo;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -94,7 +86,7 @@ public class Pedido extends Observable {
             total += lista.get(i).getQuantidade() * lista.get(i).getPreco();
         }
         
-        if(getPromocao() == null)
+        if(getPromocao() != null)
             total *= getPromocao().obterDesconto();
         
         return total;
