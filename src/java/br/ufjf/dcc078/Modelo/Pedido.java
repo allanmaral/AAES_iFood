@@ -86,7 +86,7 @@ public class Pedido extends Observable {
             total += lista.get(i).getQuantidade() * lista.get(i).getPreco();
         }
         
-        if(getPromocao() == null)
+        if(getPromocao() != null)
             total *= getPromocao().obterDesconto();
         
         return total;

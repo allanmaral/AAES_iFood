@@ -1,8 +1,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="br.ufjf.dcc078.Dominio.Pedido"%>
+<%@page import="br.ufjf.dcc078.Modelo.Pedido"%>
 <%@page import="java.util.List"%>
-<%@page import="br.ufjf.dcc078.Dominio.Produto"%>
+<%@page import="br.ufjf.dcc078.Modelo.Produto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="../jspf/cabecalho.jspf" %>
