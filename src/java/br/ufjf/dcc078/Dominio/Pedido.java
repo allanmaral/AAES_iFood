@@ -62,14 +62,6 @@ public class Pedido extends Observable {
         this.titulo = titulo;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public String getStatus() {
         return status;
     }

@@ -28,7 +28,7 @@
                         <td>Horario de abertura</td>
                         <td>Horario de Encerramento</td>  
                         <td><label>R$ <c:out value="${pedido.getTotal()}"/></label></td>    
-                        <td><a href="">Visualizar</a></td>
+                        <td><a href="FrontController?action=ExibirPedido&id=0">Visualizar</a></td>
                         <td><a href="">Adicionar</a></td>
                         <td><a href=""><label>Finalizar Pedido</label></a></td>
                     </tr>

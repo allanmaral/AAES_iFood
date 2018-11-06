@@ -14,9 +14,12 @@ public class ListaDePedidos {
             pedidos = new ArrayList<>();
             
             Pedido pedido1 = new Pedido();
+            pedido1.setTitulo("Pedido #123");
             Pedido pedido2 = new Pedido();
+            pedido2.setTitulo("Pedido #465");
             Pedido pedido3 = new Pedido();
-
+            pedido3.setTitulo("Pedido #913");
+            
             pedido1.addLista(new Produto("Refrigerante", 2, 4.0));
             pedido1.addLista(new Produto("Cerveja", 5, 5.0));
 
