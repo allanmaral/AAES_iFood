@@ -12,12 +12,12 @@ package br.ufjf.dcc078.Strategy;
 public class CompraDobro implements Promocao {
 
     @Override
-    public int obterDesconto() {
-        return 50;
+    public double obterDesconto() {
+        return 0.5;
     }
 
     @Override
-    public String obterPromocao() {
-        return "Compra em Dobro";
+    public String obterCodigo() {
+        return "COMPRAEMDOBRO";
     }
 }

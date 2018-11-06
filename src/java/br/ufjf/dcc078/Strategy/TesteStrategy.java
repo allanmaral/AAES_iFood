@@ -18,7 +18,7 @@ public class TesteStrategy {
         // TODO code application logic here
 
         AplicarPromocao produto1 = new PedidoCompraDobro();
-        AplicarPromocao produto2 = new PedidoFreteGratis();
+        AplicarPromocao produto2 = new PedidoDezPorCento();
 
         System.out.println(produto1.getNome() + " na promoção " + produto1.getPromocao() + " com desconto de " + produto1.desconto() + "%");
         System.out.println(produto2.getNome() + " na promoção " + produto2.getPromocao() + " com desconto de " + produto2.desconto() + "%");

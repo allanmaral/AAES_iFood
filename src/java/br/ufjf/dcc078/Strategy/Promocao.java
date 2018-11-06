@@ -11,8 +11,8 @@ package br.ufjf.dcc078.Strategy;
  */
 public interface Promocao {
             
-    public int obterDesconto();
-    public String obterPromocao();
+    public double obterDesconto();
+    public String obterCodigo();
      
     
 }

@@ -9,16 +9,16 @@ package br.ufjf.dcc078.Strategy;
  *
  * @author ice
  */
-public class FreteGratis implements Promocao {
+public class DezPorCento implements Promocao {
 
     @Override
-    public int obterDesconto() {
-        return 10;
+    public double obterDesconto() {
+        return 0.9;
     }
 
     @Override
-    public String obterPromocao() {
-        return "Frete Grátis";
+    public String obterCodigo() {
+        return "DEZPORCENTO";
     }
 
 }

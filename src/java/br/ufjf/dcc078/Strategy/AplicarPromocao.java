@@ -12,18 +12,18 @@ package br.ufjf.dcc078.Strategy;
 public abstract class AplicarPromocao {
 
     protected Promocao promocao;
-    protected String nome;
+    protected String codigo;
 
-    public int desconto() {
+    public double desconto() {
         return promocao.obterDesconto();
     }
 
     public String getNome() {
-        return nome;
+        return codigo;
     }
 
     public String getPromocao() {
-        return promocao.obterPromocao();
+        return promocao.obterCodigo();
     }
 
 }
