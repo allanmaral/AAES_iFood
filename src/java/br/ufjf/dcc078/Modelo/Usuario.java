@@ -70,6 +70,9 @@ public class Usuario implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(o instanceof Pedido){
+            Pedido pedido = (Pedido) o;
+            System.out.println("Status: " + pedido.getEstado().getNome());
+        }
     } 
 }
