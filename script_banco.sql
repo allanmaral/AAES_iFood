@@ -43,6 +43,9 @@ INSERT INTO usuario(nome_completo, nome_usuario, email, senha)
 INSERT INTO promocao(codigo, desconto) 
 	VALUES ('COMPRAEMDOBRO', 0.5)
 
+INSERT INTO promocao(codigo, desconto) 
+	VALUES ('DEZPORCENTO', 0.9	)
+
 
 INSERT INTO pedido(id_usuario, titulo, descricao, estado, promocao) 
     VALUES (1, 'X-Bacon', 'Sem salada e sem maionese','Pendente', 'FRETE GRATIS');
