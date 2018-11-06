@@ -14,6 +14,9 @@ import java.util.Observable;
  */
 public class PedidoAguardandoConfirmacao implements EstadoPedido{
 
+    public void PedidoAguardandoConfirmacao(){
+    }
+    
     @Override
     public void aguardarConfirmacao(Pedido pedido) {
         pedido.setEstado(new PedidoAguardandoConfirmacao());

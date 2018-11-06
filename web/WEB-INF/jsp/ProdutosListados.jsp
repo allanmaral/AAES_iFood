@@ -7,48 +7,42 @@
 
 <%@include file="../jspf/cabecalho.jspf" %>
 
+<style>
+    a.unlink { color: inherit; }
+    a.unlink:hover { color: inherit; text-decoration: none; }
+</style>
+
 <div class="container" style="margin-top:30px">
     <div class="text-center">
         <h2>Produtos</h2><br>
     </div>
-    <table border = 1 class="table table-dark table-striped text-center">        
-        <th>Nome</th>
-        <th>Quantidade</th>
-        <th>Preco</th>
-        <th>Adicionar ao carrinho</th>
-        
-        <c:choose>
-            <c:when test="${not empty produtos}">
-                <c:forEach var="produto" items="${produtos}">
-                    <tr>                            
-                        <td><c:out value="${produto.getNome()}"/></td>   
-                        <td><c:out value="${produto.getQuantidade()}"/></td>    
-                        <td><label>R$ <c:out value="${produto.getPreco()}"/></label></td>
-                        <td><a href="">Adicionar</a></td>
-                    </tr>
-                </c:forEach>
-            </c:when>
-            <c:otherwise>
-                
-            </c:otherwise>
-        </c:choose>
-    </table><br>
-    <%--<c:choose>
-        <c:when test="${not empty produtos}">
-            <c:forEach var="produto" items="${produtos}">
-                <div class="text-center">
-                    <c:out value="${produto.getNome()}"/>  
-                    <c:out value="${produto.getQuantidade()}"/>    
-                    R$ <c:out value="${produto.getPreco()}"/>
-                    <a href="">Adicionar</a></td>
-                </div>
-            </c:forEach>
-        </c:when>
-        <c:otherwise>
-
-        </c:otherwise>
-    </c:choose>--%>
     
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <c:choose>
+                    <c:when test="${not empty produtos}">
+                        <c:forEach var="produto" items="${produtos}">
+                            <a class="unlink" href="">
+                                <div class="border-top">
+                                    <br>
+                                    <h4><c:out value="${produto.getNome()}"/></h4>
+                                    <p>Uma descrição para o item vem aqui</p>    
+                                    <label class="text-success">R$ <c:out value="${produto.getPreco()}"/></label><br>
+                                </div><br>
+                            </a>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
 </div>
 
 <%@include file="../jspf/rodape.jspf" %>

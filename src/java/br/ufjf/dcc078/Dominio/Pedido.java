@@ -2,6 +2,7 @@ package br.ufjf.dcc078.Dominio;
 
 import br.ufjf.dcc078.Memento.MementoPedido;
 import br.ufjf.dcc078.State.EstadoPedido;
+import br.ufjf.dcc078.State.PedidoAguardandoConfirmacao;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.Observable;
 
 public class Pedido extends Observable {
             
-    EstadoPedido estado;
+    private EstadoPedido estado;
     private List<Produto> lista = new ArrayList<>();
     private Usuario usuario;
     private String titulo;
@@ -19,6 +20,7 @@ public class Pedido extends Observable {
     private String promocao;
 
     public Pedido() {
+        this.estado = new PedidoAguardandoConfirmacao();
     }
 
     
@@ -28,6 +30,7 @@ public class Pedido extends Observable {
         this.descricao = descricao;
         this.status = status;
         this.promocao = promocao;
+        this.estado = new PedidoAguardandoConfirmacao();
     }
 
     

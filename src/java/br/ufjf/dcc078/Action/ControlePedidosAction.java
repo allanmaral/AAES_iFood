@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ControlePedidosAction implements Action{
 
     private RequestDispatcher despachante;
-    private List<Pedido> pedidos = new ListaDePedidos().getInstance();    
+    private List<Pedido> pedidos = ListaDePedidos.getInstance();    
     private List<Produto> produto;
     private Pedido pedido;
     

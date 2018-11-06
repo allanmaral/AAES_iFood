@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ListaDePedidos {
 
-    private static List<Pedido> pedidos;
+    private static List<Pedido> pedidos = null;
 
     public static List<Pedido> getInstance() {
 
@@ -28,6 +28,13 @@ public class ListaDePedidos {
             pedido3.addLista(new Produto("Agua Mineral", 3, 2.0));
             pedido3.addLista(new Produto("Chiclete", 5, 0.25));
             pedido3.addLista(new Produto("Chocolate", 1, 2.0));
+            
+            pedido2.colocarEmProducao();
+            pedido2.encaminhar();
+            
+            pedido3.colocarEmProducao();
+            pedido3.encaminhar();
+            pedido3.entregar();
 
             pedidos.add(pedido1);
             pedidos.add(pedido2);
