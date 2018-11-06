@@ -1,6 +1,6 @@
-package br.ufjf.dcc078.Dominio;
+package br.ufjf.dcc078.Modelo;
 
-import br.ufjf.dcc078.Dominio.Pedido;
+import br.ufjf.dcc078.Modelo.Pedido;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package br.ufjf.dcc078.Dominio;
+package br.ufjf.dcc078.Modelo;
 
 import br.ufjf.dcc078.Memento.MementoPedido;
 import br.ufjf.dcc078.State.EstadoPedido;

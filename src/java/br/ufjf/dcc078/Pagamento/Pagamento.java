@@ -5,7 +5,7 @@
  */
 package br.ufjf.dcc078.Pagamento;
 
-import br.ufjf.dcc078.Dominio.Pedido;
+import br.ufjf.dcc078.Modelo.Pedido;
 
 /**
  *
