@@ -7,13 +7,14 @@ import br.ufjf.dcc078.Strategy.Promocao;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
 public class Pedido extends Observable {
             
     private EstadoPedido estado;
-    private List<Produto> lista = new ArrayList<>();
+    private List<Produto> produtos = new ArrayList<>();
     private Usuario usuario;
     private String titulo;
     private String descricao;
@@ -36,15 +37,15 @@ public class Pedido extends Observable {
 
     
     public void addLista(Produto p) {
-        this.lista.add(p);
+        this.produtos.add(p);
     }
 
     public List<Produto> getLista() {
-        return lista;
+        return produtos;
     }
 
     public void setLista(List<Produto> lista) {
-        this.lista = lista;
+        this.produtos = lista;
     }
 
     public Usuario getUsuario() {
@@ -82,8 +83,9 @@ public class Pedido extends Observable {
     public Double getTotal() {
         Double total = 0.0;
 
-        for (int i = 0; i < lista.size(); i++) {
-            total += lista.get(i).getQuantidade() * lista.get(i).getPreco();
+        for (Iterator i = produtos.iterator(); i.hasNext();) {
+            Produto p = (Produto)i.next();
+            total += p.getQuantidade() * p.getPreco();
         }
         
         if(getPromocao() != null)
