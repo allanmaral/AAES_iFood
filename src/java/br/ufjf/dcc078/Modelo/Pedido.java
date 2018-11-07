@@ -31,6 +31,17 @@ public class Pedido extends Observable {
         this.estado = new PedidoAguardandoConfirmacao();
     }
 
+    public Pedido(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public Pedido(String titulo, Promocao promocao) {
+        this.titulo = titulo;
+        this.promocao = promocao;
+    }
+
+    
+
     public void addLista(Produto p) {
         this.lista.add(p);
     }

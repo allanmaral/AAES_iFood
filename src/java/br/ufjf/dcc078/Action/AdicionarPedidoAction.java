@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ice
  */
-public class AdicionarPedido implements Action {
+public class AdicionarPedidoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -30,15 +30,20 @@ public class AdicionarPedido implements Action {
             response.sendRedirect("index.jsp");
         } else {
             try {
+                
+                /*  
+                    TODO: Promoção
+                */
+                
                 Pedido pedido = new Pedido(titulo);
 
                 try {
                     PedidoDAO.getInstance().save(pedido);
                 } catch (ClassNotFoundException ex) {
                     response.sendRedirect("WEB-INF/jsp/AdicionarPedidoErro.jsp");
-                    Logger.getLogger(AdicionarPedido.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdicionarPedidoAction.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response.sendRedirect("WEB-INF/jsp/AdicionarPedido.jsp");
+                response.sendRedirect("WEB-INF/jsp/AdicionarPedidoSucesso.jsp");
             } catch (SQLException ex) {
                 response.sendRedirect("WEB-INF/jsp/AdicionarPedidoErro.jsp");
                 ex.printStackTrace();

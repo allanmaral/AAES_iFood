@@ -11,20 +11,27 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
+<%@include file="../jspf/cabecalho.jspf" %>
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Adicionar Pedido</title>
-    </head>
-    <body>
-        <h1>Adicionar Pedidos</h1>
-        <form action="/FrontController?action=AdicionarPedido" method="post">
-            <label>Entre com o título:</label>
-            <input type="text" name="txtTitulo"/><br/>
-            <label>Entre com a promoção:</label>
-            <input type="text" name="txtPromocao"/><br/>
-            <input type="submit"/>
-        </form>    
-    </body>
-</html>
+<style>
+    .center {
+        margin: auto;
+        width: 50%; 
+    }
+</style>
+
+<div class="container center">
+    <h2>Cadastro de Pedidos</h2><br/>
+    <form action="FrontController?action=AdicionarPedido" method="get">
+        <div class="form-group">
+        <label>Título:</label>
+        <input type="text" name="txtTitulo" placeholder="Digite o título"/><br/>
+        <label>Promoção:</label>
+        <input type="text" name="txtPromocao" placeholder="Digite a Promoção"/><br/>
+        </div>
+        <input type="submit"/>
+        
+    </form>    
+</div>
+
+<%@include file="../jspf/rodape.jspf" %>
