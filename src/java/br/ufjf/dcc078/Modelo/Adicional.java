@@ -29,4 +29,9 @@ public class Adicional extends Componente {
     public Double getPrecoTotal() {
         return getQuantidade() * getPreco();
     }
+
+    @Override
+    public Boolean temSubProduto() {
+        return false;
+    }
 }

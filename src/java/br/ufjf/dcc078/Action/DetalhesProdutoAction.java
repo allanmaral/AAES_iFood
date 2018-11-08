@@ -6,8 +6,10 @@
 package br.ufjf.dcc078.Action;
 
 import br.ufjf.dcc078.Modelo.Adicional;
+import br.ufjf.dcc078.Modelo.Componente;
 import br.ufjf.dcc078.Modelo.ListaDeProdutos;
 import br.ufjf.dcc078.Modelo.Produto;
+import br.ufjf.dcc078.Persistencia.ComponenteDAO;
 import br.ufjf.dcc078.Servlet.Action;
 import java.io.IOException;
 import java.util.List;
@@ -33,15 +35,13 @@ public class DetalhesProdutoAction implements Action{
          */
         
         String idProduto = request.getParameter("idPdt");
+        int id = Integer.parseInt(idProduto);
         
-        Produto produto = new Produto();
-        produto.setNome("X Bacon").setDescricao("Pão de hamburguer classico, bife, ovo, extra bacon, queijo, batata palha e salada").setPreco(10.0);
-        Adicional adicional1 = new Adicional();
-        adicional1.setNome("Maionese").setPreco(0.5);
-        Adicional adicional2 = new Adicional();
-        adicional2.setNome("Molho Barbecue").setPreco(2.0);
-        produto.adicionarComponente(adicional1);
-        produto.adicionarComponente(adicional2);
+        Componente componente = ComponenteDAO.getInstance().readById(id);
+        Produto produto = null;
+        if(componente instanceof Produto) {
+            produto = (Produto) componente;
+        }
         
         request.setAttribute("produto", produto);
         despachante = request.getRequestDispatcher("WEB-INF/jsp/DetalhesProduto.jsp");

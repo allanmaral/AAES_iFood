@@ -14,11 +14,12 @@ import java.util.Observable;
 public class Pedido extends Observable {
 
     private EstadoPedido estado;
-    private List<Produto> produtos = new ArrayList<>();
+    private ArrayList<Componente> componentes = new ArrayList<>();
     private Usuario usuario;
     private String titulo;
     private String status;
     private Promocao promocao;
+    private int id;
 
     public Pedido() {
         this.estado = new PedidoAguardandoConfirmacao();
@@ -41,58 +42,72 @@ public class Pedido extends Observable {
         this.promocao = promocao;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public Pedido setId(int id) {
+        this.id = id;
+        return this;
+    }
+
     
 
     public void addLista(Produto p) {
-        this.produtos.add(p);
+        this.componentes.add(p);
     }
 
-    public List<Produto> getLista() {
-        return produtos;
+    public ArrayList<Componente> getLista() {
+        return componentes;
     }
 
-    public void setLista(List<Produto> lista) {
-        this.produtos = lista;
+    public Pedido setLista(ArrayList<Componente> lista) {
+        this.componentes = lista;
+        return this;
     }
 
     public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public Pedido setUsuario(Usuario usuario) {
         this.usuario = usuario;
+        return this;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
+    public Pedido setTitulo(String titulo) {
         this.titulo = titulo;
+        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public Pedido setStatus(String status) {
         this.status = status;
+        return this;
     }
 
     public Promocao getPromocao() {
         return promocao;
     }
 
-    public void setPromocao(Promocao promocao) {
+    public Pedido setPromocao(Promocao promocao) {
         this.promocao = promocao;
+        return this;
     }
 
     public Double getTotal() {
         Double total = 0.0;
 
-        for (Iterator i = produtos.iterator(); i.hasNext();) {
-            Produto p = (Produto)i.next();
-            total += p.getQuantidade() * p.getPreco();
+        for (Iterator<Componente> i = componentes.iterator(); i.hasNext();) {
+            Componente cp = i.next();
+            total += cp.getPrecoTotal();
         }
 
         if (getPromocao() != null) {
@@ -106,10 +121,11 @@ public class Pedido extends Observable {
         return estado;
     }
 
-    public void setEstado(EstadoPedido estado) {
+    public Pedido setEstado(EstadoPedido estado) {
         this.estado = estado;
         setChanged();
         notifyObservers();
+        return this;
     }
 
     public void aguardarConfirmacao() {

@@ -5,12 +5,17 @@
  */
 package br.ufjf.dcc078.Persistencia;
 
+import br.ufjf.dcc078.Modelo.Componente;
 import br.ufjf.dcc078.Modelo.Pedido;
 import br.ufjf.dcc078.Modelo.Usuario;
+import br.ufjf.dcc078.State.StateFactory;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -82,7 +87,80 @@ public class PedidoDAO {
             closeResources(conn, stmt);
         }
     }
-
+    
+    public ArrayList<Pedido> readList(Usuario usuario) {
+        ArrayList<Pedido> lista = new ArrayList<>();
+        Connection conn = null;
+        Statement st = null;
+        
+        try {
+            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            String sql = "SELECT * FROM pedido WHERE (id_usuario = " + usuario.getId() + " AND estado <> 'Carrinho')";
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()) {
+                int idPromocao = rs.getInt("id_promocao");
+                String estado = rs.getString("estado");
+                
+                Pedido pedido = new Pedido();
+                
+                pedido.setUsuario(usuario)
+                      .setId(rs.getInt("id_pedido"))
+                      .setTitulo(rs.getString("titulo"))
+                      .setEstado(StateFactory.create(estado));
+                
+                System.out.println("Testando");
+                pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
+                
+                lista.add(pedido);
+                
+                
+                
+            }
+            
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            closeResources(conn, st);
+        }
+        
+        return lista;
+    }
+    
+    public Pedido readById(int id) {
+        Pedido pedido = null;
+        Connection conn = null;
+        Statement st = null;
+        
+        try {
+            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            String sql = "SELECT * FROM pedido WHERE (id_pedido = " + id + ")";
+            ResultSet rs = st.executeQuery(sql);
+            
+            if(rs.next()) {
+                int idPromocao = rs.getInt("id_promocao");
+                String estado = rs.getString("estado");
+                
+                pedido = new Pedido();
+                
+                pedido.setId(rs.getInt("id_pedido"))
+                      .setTitulo(rs.getString("titulo"))
+                      .setEstado(StateFactory.create(estado));
+                
+                pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
+            }
+            
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            closeResources(conn, st);
+        }
+        
+        return pedido;
+    }
+    
     public void closeResources(Connection conn, Statement st) {
         try {
             if (st != null) {
@@ -93,6 +171,58 @@ public class PedidoDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public Pedido readCart(Usuario usuario) {
+        Pedido pedido = null;
+        Connection conn = null;
+        Statement st = null;
+        
+        try {
+            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            String sql = "SELECT * FROM pedido WHERE (id_usuario = " + usuario.getId() + " AND estado = 'Carrinho' )";
+            ResultSet rs = st.executeQuery(sql);
+            
+            if(rs.next()) {
+                int idPromocao = rs.getInt("id_promocao");
+                String estado = rs.getString("estado");
+                
+                pedido = new Pedido();
+                
+                pedido.setId(rs.getInt("id_pedido"))
+                      .setTitulo(rs.getString("titulo"))
+                      .setEstado(StateFactory.create(estado));
+                
+                pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
+            }
+            
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            closeResources(conn, st);
+        }
+        
+        return pedido;
+    }
+
+    public void saveCart(Usuario usuario) {
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            st.execute("insert into pedido(id_usuario, titulo, status) "
+                    + "values('"
+                    + usuario.getId() + "','"
+                    + "Carrinho')"
+            );
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            closeResources(conn, st);
         }
     }
 }
