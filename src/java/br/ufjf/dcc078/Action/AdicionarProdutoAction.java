@@ -64,7 +64,7 @@ public class AdicionarProdutoAction implements Action{
         montarComponente(componente, request);
         
         try {
-            ComponentePedidoDAO.getInstance().addComponent(1, componente);
+            ComponentePedidoDAO.getInstance().addComponent(2, componente);
         } catch (SQLException ex) {
             Logger.getLogger(AdicionarProdutoAction.class.getName()).log(Level.SEVERE, null, ex);
         }

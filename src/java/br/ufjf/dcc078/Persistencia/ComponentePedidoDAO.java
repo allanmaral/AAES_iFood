@@ -13,7 +13,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -108,6 +111,67 @@ public class ComponentePedidoDAO {
         } finally {
             closeResources(conn, st);
         }
+    }
+    
+    private void read(Componente componente, Pedido pedido) {
+        Connection conn = null;
+        Statement st = null;
+        
+        try {
+            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            String sql = "SELECT * FROM componente_pedido WHERE (id_pedido = " + pedido.getId() + " AND " + 
+                                                                "id_componente = " + componente.getId() + " )";
+            ResultSet rs = st.executeQuery(sql);
+            
+            if(rs.next()) {
+                componente.setQuantidade(rs.getInt("quantidade"));
+                
+                if(componente.temSubProduto()) {
+                    Produto prod = (Produto) componente;
+                    for(Iterator<Componente> it = prod.getComponentes().iterator(); it.hasNext(); ) {
+                        read(it.next(), pedido);
+                    }
+                }
+            }
+            
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+    
+    ArrayList<Componente> readListByOrder(Pedido pedido) {
+        ArrayList<Componente> lista = new ArrayList<>();
+        Connection conn = null;
+        Statement st = null;
+                
+        try {
+            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            String sql = "SELECT * FROM componente_pedido WHERE (id_pedido = " + pedido.getId() + " AND " + 
+                                                                "id_componente in ( SELECT id_componente FROM componente WHERE (id_pai IS NULL) ))";
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()) {
+                int id_componente = rs.getInt("id_componente");
+                Componente componente = ComponenteDAO.getInstance()
+                                                     .readById(id_componente)
+                                                     .setQuantidade(rs.getInt("quantidade"));
+                
+                read(componente, pedido);
+                
+                lista.add(componente);
+            }
+            
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            closeResources(conn, st);
+        }
+        
+        return lista;
     }
 
     public void closeResources(Connection conn, Statement st) {

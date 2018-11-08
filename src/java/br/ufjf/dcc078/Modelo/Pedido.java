@@ -13,11 +13,12 @@ import java.util.Observable;
 public class Pedido extends Observable {
 
     private EstadoPedido estado;
-    private List<Produto> lista = new ArrayList<>();
+    private ArrayList<Componente> lista = new ArrayList<>();
     private Usuario usuario;
     private String titulo;
     private String status;
     private Promocao promocao;
+    private int id;
 
     public Pedido() {
         this.estado = new PedidoAguardandoConfirmacao();
@@ -40,50 +41,64 @@ public class Pedido extends Observable {
         this.promocao = promocao;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public Pedido setId(int id) {
+        this.id = id;
+        return this;
+    }
+
     
 
     public void addLista(Produto p) {
         this.lista.add(p);
     }
 
-    public List<Produto> getLista() {
+    public List<Componente> getLista() {
         return lista;
     }
 
-    public void setLista(List<Produto> lista) {
+    public Pedido setLista(ArrayList<Componente> lista) {
         this.lista = lista;
+        return this;
     }
 
     public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public Pedido setUsuario(Usuario usuario) {
         this.usuario = usuario;
+        return this;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
+    public Pedido setTitulo(String titulo) {
         this.titulo = titulo;
+        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public Pedido setStatus(String status) {
         this.status = status;
+        return this;
     }
 
     public Promocao getPromocao() {
         return promocao;
     }
 
-    public void setPromocao(Promocao promocao) {
+    public Pedido setPromocao(Promocao promocao) {
         this.promocao = promocao;
+        return this;
     }
 
     public Double getTotal() {
@@ -104,10 +119,11 @@ public class Pedido extends Observable {
         return estado;
     }
 
-    public void setEstado(EstadoPedido estado) {
+    public Pedido setEstado(EstadoPedido estado) {
         this.estado = estado;
         setChanged();
         notifyObservers();
+        return this;
     }
 
     public void aguardarConfirmacao() {

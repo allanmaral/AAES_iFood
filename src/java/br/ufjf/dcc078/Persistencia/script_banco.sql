@@ -23,7 +23,7 @@ CREATE TABLE pedido (
     id_usuario INTEGER NOT NULL,
     id_promocao INTEGER NOT NULL,
     titulo VARCHAR(50) NOT NULL,
-    estado VARCHAR(15) NOT NULL,    
+    estado VARCHAR(32) NOT NULL,    
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE,
     FOREIGN KEY (id_promocao) REFERENCES promocao(id_promocao) ON DELETE CASCADE
 );
@@ -55,8 +55,9 @@ INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Allan', 
 INSERT INTO promocao(codigo, desconto) VALUES ('COMPRAEMDOBRO', 0.5);
 INSERT INTO promocao(codigo, desconto) VALUES ('DEZPORCENTO', 0.9);
 
-INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (1, 1, 'X-Bacon', 'Pendente');
-INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (2, 2, 'X-Salada', 'Em Produção');
+INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (1, 1, 'X-Bacon', 'Aguardando Confirmacao');
+INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (2, 2, 'X-Salada', 'Em Producao');
+INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (2, 2, 'Hamburguer Simples', 'Entregue');
 INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (3, 1, 'Hamburguer Simples', 'Encaminhado');
 INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (4, 2, 'X-Egg', 'Entregue');
 INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (4, 1, 'X-egg', 'Cancelado');
