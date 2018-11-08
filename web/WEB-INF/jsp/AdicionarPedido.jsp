@@ -20,11 +20,10 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
     </div>
 
     <form action="FrontController?action=AdicionarPedido" method="post">
+        
         <div class="form-group">            
             <label >Título:</label>
-            <input class="form-control" type="text" name="txtTitulo" placeholder="Digite o Título"/><br/>
-        </div>
-        <div class="form-group">            
+            <input class="form-control" type="text" name="txtTitulo" placeholder="Digite o Título"/><br/>                     
             <label>Promoção:</label>
             <input class="form-control" type="text" name="txtPromocao" placeholder="Digite a Promoção"/><br/>
         </div>           
@@ -36,9 +35,7 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 
     </form><br/><br/>    
 
-    <div class="alert alert-info text-center">
-        <strong>Informação!</strong> Utilize o menu para navegação
-    </div><br>
+   
 
 </div>
 
