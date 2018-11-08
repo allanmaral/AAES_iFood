@@ -12,12 +12,11 @@ import java.util.List;
 import java.util.Observable;
 
 public class Pedido extends Observable {
-            
+
     private EstadoPedido estado;
     private List<Produto> produtos = new ArrayList<>();
     private Usuario usuario;
     private String titulo;
-    private String descricao;
     private String status;
     private Promocao promocao;
 
@@ -25,17 +24,25 @@ public class Pedido extends Observable {
         this.estado = new PedidoAguardandoConfirmacao();
     }
 
-    
-    public Pedido(Usuario usuario, String titulo, String descricao, String status, Promocao promocao) {
+    public Pedido(Usuario usuario, String titulo, String status, Promocao promocao) {
         this.usuario = usuario;
         this.titulo = titulo;
-        this.descricao = descricao;
         this.status = status;
         this.promocao = promocao;
         this.estado = new PedidoAguardandoConfirmacao();
     }
 
+    public Pedido(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public Pedido(String titulo, Promocao promocao) {
+        this.titulo = titulo;
+        this.promocao = promocao;
+    }
+
     
+
     public void addLista(Produto p) {
         this.produtos.add(p);
     }
@@ -79,7 +86,7 @@ public class Pedido extends Observable {
     public void setPromocao(Promocao promocao) {
         this.promocao = promocao;
     }
-    
+
     public Double getTotal() {
         Double total = 0.0;
 
@@ -87,13 +94,14 @@ public class Pedido extends Observable {
             Produto p = (Produto)i.next();
             total += p.getQuantidade() * p.getPreco();
         }
-        
-        if(getPromocao() != null)
+
+        if (getPromocao() != null) {
             total *= getPromocao().obterDesconto();
-        
+        }
+
         return total;
     }
-    
+
     public EstadoPedido getEstado() {
         return estado;
     }
@@ -103,32 +111,32 @@ public class Pedido extends Observable {
         setChanged();
         notifyObservers();
     }
-    
-    public void aguardarConfirmacao(){
+
+    public void aguardarConfirmacao() {
         this.getEstado().aguardarConfirmacao(this);
     }
-    
-    public void colocarEmProducao(){
+
+    public void colocarEmProducao() {
         this.getEstado().colocarEmProducao(this);
     }
-    
-    public void encaminhar(){
+
+    public void encaminhar() {
         this.getEstado().encaminhar(this);
     }
-    
-    public void entregar(){
+
+    public void entregar() {
         this.getEstado().entregar(this);
     }
-    
-    public void cancelar(){
+
+    public void cancelar() {
         this.getEstado().cancelar(this);
     }
-    
-    public MementoPedido save(){
-         return new MementoPedido(this.estado);
+
+    public MementoPedido save() {
+        return new MementoPedido(this.estado);
     }
-    
-    public void restore(MementoPedido m){
+
+    public void restore(MementoPedido m) {
         this.estado = m.getEstadoPedido();
     }
 }

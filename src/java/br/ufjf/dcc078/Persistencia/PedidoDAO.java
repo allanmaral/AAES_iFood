@@ -37,12 +37,16 @@ public class PedidoDAO {
         try {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into pedido(id_usuario, titulo, descricao, status, promocao) "
+//            st.execute("insert into pedido(id_usuario, titulo, descricao, status, promocao) "
+//                    + "values('"
+//                    + pedido.getUsuario().getId() + "','"
+//                    + pedido.getTitulo() + "', '"
+//                    + pedido.getStatus() + "', '"
+//                    + pedido.getPromocao() + "')"
+//            );
+            st.execute("insert into pedido(titulo) "
                     + "values('"
-                    + pedido.getUsuario().getId() + "','"
-                    + pedido.getTitulo() + "', '"
-                    + pedido.getStatus() + "', '"
-                    + pedido.getPromocao() + "')"
+                    + pedido.getTitulo() + "') '"
             );
         } catch (SQLException e) {
             throw e;
