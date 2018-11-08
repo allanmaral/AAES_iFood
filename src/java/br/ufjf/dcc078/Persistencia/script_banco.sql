@@ -31,7 +31,7 @@ CREATE TABLE pedido (
 CREATE TABLE componente (
     id_componente INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     e_produto BOOLEAN NOT NULL,
-    preco DECIMAL NOT NULL,
+    preco REAL NOT NULL,
     titulo VARCHAR(50) NOT NULL,
     descricao VARCHAR(256) NOT NULL,
     id_pai INTEGER,

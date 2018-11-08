@@ -7,26 +7,28 @@ package br.ufjf.dcc078.Persistencia;
 
 import br.ufjf.dcc078.Modelo.Componente;
 import br.ufjf.dcc078.Modelo.Pedido;
+import br.ufjf.dcc078.Modelo.Produto;
 import br.ufjf.dcc078.Modelo.Usuario;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 
 /**
  *
  * @author douglas
  */
-public class PedidoDAO {
+public class ComponentePedidoDAO {
 
-    private static PedidoDAO instance = new PedidoDAO();
+    private static ComponentePedidoDAO instance = new ComponentePedidoDAO();
 
-    private PedidoDAO() {
+    private ComponentePedidoDAO() {
     }
 
     ;
     
-    public static PedidoDAO getInstance() {
+    public static ComponentePedidoDAO getInstance() {
         return instance;
     }
 
@@ -80,6 +82,34 @@ public class PedidoDAO {
         }
     }
     
+    public void addComponent(int idPedido, Componente componente) throws
+            SQLException, ClassNotFoundException {
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            st.execute("insert into componente_pedido(id_componente, id_pedido, quantidade) "
+                    + "values("
+                    + componente.getId() + ", "
+                    + idPedido + ", "
+                    + componente.getQuantidade() + ")"
+            );
+            
+            if(componente.temSubProduto()) {
+                Produto p = (Produto) componente;
+                for(Iterator<Componente> it = p.getComponentes().iterator(); it.hasNext(); ) {
+                    addComponent(idPedido, it.next());
+                }
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+
     public void closeResources(Connection conn, Statement st) {
         try {
             if (st != null) {
