@@ -36,6 +36,11 @@ public class Produto extends Componente {
         return this.componentes;
     }
     
+    public Produto setComponentes(ArrayList<Componente> componentes) {
+        this.componentes = componentes;
+        return this;
+    }
+    
     @Override
     public String toString() {
         return "produtos{" + "nome=" + nome + '}';
@@ -48,6 +53,11 @@ public class Produto extends Componente {
             precoTotal += it.next().getPrecoTotal();
         }
         return precoTotal;
+    }
+
+    @Override
+    public Boolean temSubProduto() {
+        return true;
     }
     
     

@@ -34,13 +34,23 @@
                                 <form class="form-horizontal" action="FrontController?action=AdicionarProduto" method="post">
                                     <c:forEach var="prd" items="${produto.getComponentes()}">
                                         <div class="form-group row">
-                                            <a class="unlink col-lg-1" href=""> 
-                                                <i class="glyphicon glyphicon-check"></i>
-                                            </a>
+                                            <c:choose>
+                                                <c:when test="${prd.temSubProduto()}">
+                                                    <a class="unlink col-lg-1" href='FrontController?action=DetalhesProduto&idPdt=<c:out value="${prd.getId()}"/>'> 
+                                                        <i class="glyphicon glyphicon-check">+</i>
+                                                    </a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="col-lg-1" href='FrontController?action=DetalhesProduto&idPdt=<c:out value="${prd.getId()}"/>'> 
+                                                        <i class="glyphicon glyphicon-check"></i>
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            
                                             <label class="control-label col-lg-7"><c:out value="${prd.getNome()}"/></label>
                                             <label class="text-danger control-label col-lg-2">R$ <c:out value="${prd.getPreco()}"/></label>
                                             <div class="col-lg-2">
-                                                <input type="number" class="form-control" name="quantidade" value="1" />
+                                                <input type="number" class="form-control" name="quantidade" value="0" />
                                             </div>
                                         </div>
                                     </c:forEach>

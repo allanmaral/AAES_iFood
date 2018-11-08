@@ -10,10 +10,11 @@ package br.ufjf.dcc078.Modelo;
  * @author allan
  */
 public abstract class Componente {
+    protected int id;
     protected String nome;
     protected String descricao;
-    protected Integer quantidade;    
-    protected Double preco;
+    protected int quantidade;    
+    protected double preco;
 
     public Componente() {
     }
@@ -24,6 +25,15 @@ public abstract class Componente {
         this.preco = 1.0;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public Componente setId(int id) {
+        this.id = id;
+        return this;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -60,6 +70,8 @@ public abstract class Componente {
         return this;
     }
     
-    abstract public Double getPrecoTotal() ;
+    abstract public Boolean temSubProduto();
+    
+    abstract public Double getPrecoTotal();
     
 }

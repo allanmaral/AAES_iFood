@@ -25,7 +25,7 @@
                 <c:choose>
                     <c:when test="${not empty produtos}">
                         <c:forEach var="produto" items="${produtos}">
-                            <a class="unlink" href="FrontController?action=DetalhesProduto&idPdt=12345">
+                            <a class="unlink" href='FrontController?action=DetalhesProduto&idPdt=<c:out value="${produto.getId()}"/>'>
                                 <div class="border-top">
                                     <br>
                                     <h4><c:out value="${produto.getNome()}"/></h4>
