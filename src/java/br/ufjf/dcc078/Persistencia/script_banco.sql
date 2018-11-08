@@ -21,8 +21,7 @@ CREATE TABLE promocao (
 CREATE TABLE pedido (
     id_pedido INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     id_usuario INTEGER NOT NULL,
-    id_promocao INTEGER NOT NULL,
-    titulo VARCHAR(50) NOT NULL,
+    id_promocao INTEGER,
     estado VARCHAR(32) NOT NULL,    
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE,
     FOREIGN KEY (id_promocao) REFERENCES promocao(id_promocao) ON DELETE CASCADE
