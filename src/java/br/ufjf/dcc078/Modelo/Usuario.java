@@ -5,6 +5,7 @@
  */
 package br.ufjf.dcc078.Modelo;
 
+import br.ufjf.dcc078.Services.MailService;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -72,7 +73,7 @@ public class Usuario implements Observer{
     public void update(Observable o, Object arg) {
         if(o instanceof Pedido){
             Pedido pedido = (Pedido) o;
-            System.out.println("Status: " + pedido.getEstado().getNome());
+            MailService.getInstance().send("Pedido no AAES Food", "Status: " + pedido.getEstado().getNome());
         }
     } 
 }
