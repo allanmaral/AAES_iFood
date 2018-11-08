@@ -27,14 +27,13 @@ public class AdicionarPedidoAction implements Action {
         String promocao = request.getParameter("txtPromocao");
 
         if (titulo.equals("") || promocao.equals("")) {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("index.jsp");            
         } else {
             try {
                 
                 /*  
                     TODO: Promoção
-                */
-                
+                */                
                 Pedido pedido = new Pedido(titulo);
 
                 try {
