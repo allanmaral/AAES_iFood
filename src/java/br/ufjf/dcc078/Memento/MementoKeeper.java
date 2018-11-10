@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Gabriel Maia
  */
 public class MementoKeeper {
-    private ArrayList<MementoPedido> mementos = new ArrayList<>();
+    private final ArrayList<MementoPedido> mementos = new ArrayList<>();
 
     public void addMemento(MementoPedido m) {
         mementos.add(m);
