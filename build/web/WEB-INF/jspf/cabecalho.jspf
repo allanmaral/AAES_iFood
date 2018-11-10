@@ -35,7 +35,7 @@
                         <a class="nav-link" href="FrontController?action=ControlePedidos">Meus Pedidos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="FrontController?action=ExibirPedido&id=-1">Carrinho</a>
+                        <a class="nav-link" href='FrontController?action=ExibirCarrinho'>Carrinho</a>
                     </li>
                 </ul>
             </div>  

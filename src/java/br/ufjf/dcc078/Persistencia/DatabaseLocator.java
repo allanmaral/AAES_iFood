@@ -24,7 +24,8 @@ public class DatabaseLocator {
     
     public Connection getConnection() throws SQLException, ClassNotFoundException
     {
-        Class.forName("com.mysql.jdbc.Driver");
+        //Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("org.apache.derby.jdbc.ClientDriver");
         Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/ifood", "root", "admin");
         return conn;
     }
