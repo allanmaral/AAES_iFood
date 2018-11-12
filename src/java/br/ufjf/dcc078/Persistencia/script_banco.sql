@@ -15,7 +15,7 @@ CREATE TABLE usuario (
 CREATE TABLE promocao (
     id_promocao INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     codigo VARCHAR(50) NOT NULL,
-    desconto DECIMAL(10,1)
+    nome VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE pedido (
@@ -51,8 +51,8 @@ INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Douglas 
 INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Jonas', 'jon', 'jonas@gmail.com', '123');
 INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Allan', 'all', 'allanmaralr@gmail.com', '123');
 
-INSERT INTO promocao(codigo, desconto) VALUES ('COMPRAEMDOBRO', 0.5);
-INSERT INTO promocao(codigo, desconto) VALUES ('DEZPORCENTO', 0.9);
+INSERT INTO promocao(codigo, nome) VALUES ('COMPRAEMDOBRO', 'CompraDobro');
+INSERT INTO promocao(codigo, nome) VALUES ('DEZPORCENTO', 'DezPorCento');
 
 INSERT INTO pedido(id_usuario, id_promocao, estado) VALUES (1, 1, 'Aguardando Confirmacao');
 INSERT INTO pedido(id_usuario, id_promocao, estado) VALUES (2, 2, 'Em Producao');

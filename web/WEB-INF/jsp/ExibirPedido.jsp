@@ -37,7 +37,14 @@
                             </c:choose>
          
                             <label>Preço total: </label>
-                            <label class="text-success">R$ <c:out value="${pedido.getTotal()}"/></label><br>
+                            <label class="text-success">R$ <fmt:formatNumber pattern="#,##0.00" value="${pedido.getTotal()}"/></label><br>
+                            <c:choose>
+                                <c:when test="${not empty pedido.getPromocao()}">
+                                    <label>Código Promocional: </label>
+                                    <label><c:out value="${pedido.getPromocao().obterCodigo()}" /></label>
+                                    <label class="text-success">( -R$ <fmt:formatNumber pattern="#,##0.00" value="${pedido.getValorDesconto()}"/>)</label><br>
+                                </c:when>
+                            </c:choose>
                             <br>
                             <h5>Conteudo do Pedido</h5>
                             <c:forEach var="prd" items="${pedido.getLista()}">

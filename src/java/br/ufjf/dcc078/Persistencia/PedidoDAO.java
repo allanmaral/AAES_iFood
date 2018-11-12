@@ -9,6 +9,7 @@ import br.ufjf.dcc078.Modelo.Componente;
 import br.ufjf.dcc078.Modelo.Pedido;
 import br.ufjf.dcc078.Modelo.Usuario;
 import br.ufjf.dcc078.State.StateFactory;
+import br.ufjf.dcc078.Strategy.Promocao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,7 +61,28 @@ public class PedidoDAO {
         }
     }
     
-    
+    public void update(Pedido pedido) {
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            String sql = "UPDATE pedido "
+                       + "SET estado = '" + pedido.getEstado().toString() + "' ";
+            if(pedido.getPromocao() != null) {
+                sql += ", id_promocao = " + pedido.getPromocao().getId()+ " "; 
+            }
+            sql += "WHERE id_pedido = " + pedido.getId();
+            
+            st.execute(sql);
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResources(conn, st);
+        }
+    }
 
     public String read(Usuario usuario) throws
             SQLException, ClassNotFoundException {
@@ -102,14 +124,15 @@ public class PedidoDAO {
             ResultSet rs = st.executeQuery(sql);
             
             while(rs.next()) {
-                int idPromocao = rs.getInt("id_promocao");
+                Promocao promocao = getPromocao(rs);
                 String estado = rs.getString("estado");
                 
                 Pedido pedido = new Pedido();
                 
                 pedido.setUsuario(usuario)
                       .setId(rs.getInt("id_pedido"))
-                      .setEstado(StateFactory.create(estado));
+                      .setEstado(StateFactory.create(estado))
+                      .setPromocao(promocao);
                 
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
                 
@@ -138,13 +161,15 @@ public class PedidoDAO {
             ResultSet rs = st.executeQuery(sql);
             
             if(rs.next()) {
-                int idPromocao = rs.getInt("id_promocao");
+                Promocao promocao = getPromocao(rs);
+                
                 String estado = rs.getString("estado");
                 
                 pedido = new Pedido();
                 
                 pedido.setId(rs.getInt("id_pedido"))
-                      .setEstado(StateFactory.create(estado));
+                      .setEstado(StateFactory.create(estado))
+                      .setPromocao(promocao);
                 
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
             }
@@ -179,18 +204,21 @@ public class PedidoDAO {
         try {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            String sql = "SELECT * FROM pedido WHERE (id_usuario = " + usuario.getId() + " AND estado = 'Carrinho' )";
+            String sql = "SELECT * FROM pedido "
+                       + "WHERE (id_usuario = " + usuario.getId() + 
+                                " AND estado = 'Carrinho' )";
             ResultSet rs = st.executeQuery(sql);
             
             if(rs.next()) {
-                int idPromocao = rs.getInt("id_promocao");
+                Promocao promocao = getPromocao(rs);
                 String estado = rs.getString("estado");
                 
                 pedido = new Pedido();
                 
                 pedido.setUsuario(usuario)
                       .setId(rs.getInt("id_pedido"))
-                      .setEstado(StateFactory.create(estado));
+                      .setEstado(StateFactory.create(estado))
+                      .setPromocao(promocao);
                 
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
             }
@@ -240,5 +268,15 @@ public class PedidoDAO {
         } finally {
             closeResources(conn, st);
         }
+    }
+    
+    private Promocao getPromocao(ResultSet rs) throws SQLException {
+        Promocao promocao = null;
+        int idPromo = 0;
+        idPromo = rs.getInt("id_promocao");
+        if(!rs.wasNull()){
+            promocao = PromocaoDAO.getInstance().read(idPromo);
+        }
+        return promocao;
     }
 }
