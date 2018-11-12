@@ -1,5 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="br.ufjf.dcc078.Modelo.Pedido"%>
 <%@page import="java.util.List"%>
 <%@page import="br.ufjf.dcc078.Modelo.Produto"%>
@@ -25,7 +26,7 @@
         var precoTotal = 0.0;
         for(var i = 0; i < elementos.length; i++) {
             var id = elementos[i].id;
-            var preco = Number(document.getElementById(id+'_preco').innerHTML);
+            var preco = Number(document.getElementById(id+'_preco').innerHTML.replace(",", "."));
             var quantidade = Number(elementos[i].value);
             precoTotal += preco * quantidade;
         }
@@ -62,7 +63,7 @@
                             <p><c:out value="${produto.getDescricao()}"/></p>
                             <div>
                                 <label class="text-success">R$ </label>
-                                <label id='prodId<c:out value="${produto.getId()}"/>_preco' class="text-success"><c:out value="${produto.getPreco()}"/></label>
+                                <label id='prodId<c:out value="${produto.getId()}"/>_preco' class="text-success"><fmt:formatNumber pattern="#,##0.00" value="${produto.getPreco()}"/></label>
                             </div>
                             <br>
                         

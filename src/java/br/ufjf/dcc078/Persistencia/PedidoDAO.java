@@ -59,6 +59,8 @@ public class PedidoDAO {
             closeResources(conn, st);
         }
     }
+    
+    
 
     public String read(Usuario usuario) throws
             SQLException, ClassNotFoundException {
@@ -107,15 +109,11 @@ public class PedidoDAO {
                 
                 pedido.setUsuario(usuario)
                       .setId(rs.getInt("id_pedido"))
-                      .setTitulo(rs.getString("titulo"))
                       .setEstado(StateFactory.create(estado));
                 
-                System.out.println("Testando");
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
                 
                 lista.add(pedido);
-                
-                
                 
             }
             
@@ -146,7 +144,6 @@ public class PedidoDAO {
                 pedido = new Pedido();
                 
                 pedido.setId(rs.getInt("id_pedido"))
-                      .setTitulo(rs.getString("titulo"))
                       .setEstado(StateFactory.create(estado));
                 
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
@@ -191,8 +188,8 @@ public class PedidoDAO {
                 
                 pedido = new Pedido();
                 
-                pedido.setId(rs.getInt("id_pedido"))
-                      .setTitulo(rs.getString("titulo"))
+                pedido.setUsuario(usuario)
+                      .setId(rs.getInt("id_pedido"))
                       .setEstado(StateFactory.create(estado));
                 
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
@@ -214,13 +211,32 @@ public class PedidoDAO {
         try {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into pedido(id_usuario, titulo, status) "
-                    + "values('"
-                    + usuario.getId() + "','"
-                    + "Carrinho')"
+            st.execute("insert into pedido(id_usuario, estado) "
+                    + "values("
+                    + usuario.getId() + ", "
+                    + "'Carrinho')"
             );
         } catch (SQLException | ClassNotFoundException e) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+    
+    public void updateState(Pedido pedido) {
+        Connection conn = null;
+        Statement st = null;
+        
+        try {
+            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            String sql = "UPDATE pedido " 
+                       + "SET estado = '" + pedido.getEstado().toString() + "' "
+                       + "WHERE id_pedido = " + pedido.getId();
+            st.execute(sql);
+                        
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             closeResources(conn, st);
         }

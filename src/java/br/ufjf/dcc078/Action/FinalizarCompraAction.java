@@ -28,23 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author allan
  */
-public class AdicionarProdutoAction implements Action{
-    
-    private void montarComponente(Componente componente, HttpServletRequest request) {
-        int quantidade = 0;
-        if(request.getParameter("prodId" + componente.getId()) != null) {
-            quantidade = Integer.parseInt(request.getParameter("prodId" + componente.getId()));
-        }
-        
-        componente.setQuantidade(quantidade);
-        
-        if(componente.temSubProduto() && quantidade > 0) {
-            Produto p = (Produto) componente;
-            for(Iterator<Componente> it = p.getComponentes().iterator(); it.hasNext(); ) {
-                montarComponente(it.next(), request);
-            }
-        }
-    }
+public class FinalizarCompraAction implements Action{
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
@@ -56,16 +40,12 @@ public class AdicionarProdutoAction implements Action{
         Pedido carrinho = PedidoDAO.getInstance().readCart(usuario);
         request.setAttribute("carrinho", carrinho);
         
-        String idProduto = request.getParameter("idPdt");
-        int id = Integer.parseInt(idProduto);
+        // PROCESSAR PAGAMENTO
         
-        Componente componente = ComponenteDAO.getInstance().readById(id);
-        montarComponente(componente, request);
+        carrinho.aguardarConfirmacao();
+        PedidoDAO.getInstance().updateState(carrinho);        
         
-        ComponentePedidoDAO.getInstance().addComponent(carrinho.getId(), componente);
-        
-        
-        RequestDispatcher despachante = request.getRequestDispatcher("FrontController?action=ExibirCarrinho");
+        RequestDispatcher despachante = request.getRequestDispatcher("FrontController?action=ExibirPedido&id=" + carrinho.getId());
         despachante.forward(request, response);
     }
     

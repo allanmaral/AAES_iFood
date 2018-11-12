@@ -1,5 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="br.ufjf.dcc078.Modelo.Pedido"%>
 <%@page import="java.util.List"%>
 <%@page import="br.ufjf.dcc078.Modelo.Produto"%>
@@ -45,7 +46,7 @@
                                         <i class="glyphicon glyphicon-check"></i>
                                     </a>
                                     <label class="control-label col-lg-7"><c:out value="${prd.getNome()}"/></label>
-                                    <label class="text-danger control-label col-lg-2">R$ <c:out value="${prd.getPreco()}"/></label>
+                                    <label class="text-danger control-label col-lg-2">R$ <fmt:formatNumber pattern="#,##0.00" value="${prd.getPrecoTotal()}"/></label>
                                     <div class="col-lg-2">
                                         <input type="number" class="form-control" name="quantidade" value='<c:out value="${prd.getQuantidade()}"/>'  disabled/>
                                     </div>

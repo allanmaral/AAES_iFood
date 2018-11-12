@@ -54,12 +54,12 @@ INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Allan', 
 INSERT INTO promocao(codigo, desconto) VALUES ('COMPRAEMDOBRO', 0.5);
 INSERT INTO promocao(codigo, desconto) VALUES ('DEZPORCENTO', 0.9);
 
-INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (1, 1, 'X-Bacon', 'Aguardando Confirmacao');
-INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (2, 2, 'X-Salada', 'Em Producao');
-INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (2, 2, 'Hamburguer Simples', 'Entregue');
-INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (3, 1, 'Hamburguer Simples', 'Encaminhado');
-INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (4, 2, 'X-Egg', 'Entregue');
-INSERT INTO pedido(id_usuario, id_promocao, titulo, estado) VALUES (4, 1, 'X-egg', 'Cancelado');
+INSERT INTO pedido(id_usuario, id_promocao, estado) VALUES (1, 1, 'Aguardando Confirmacao');
+INSERT INTO pedido(id_usuario, id_promocao, estado) VALUES (2, 2, 'Em Producao');
+INSERT INTO pedido(id_usuario, id_promocao, estado) VALUES (2, 2, 'Entregue');
+INSERT INTO pedido(id_usuario, id_promocao, estado) VALUES (3, 1, 'Encaminhado');
+INSERT INTO pedido(id_usuario, id_promocao, estado) VALUES (4, 2, 'Entregue');
+INSERT INTO pedido(id_usuario, id_promocao, estado) VALUES (4, 1, 'Cancelado');
 
 INSERT INTO componente (e_produto, preco, titulo, descricao, id_pai) VALUES (TRUE , 34.0, 'Pizza Pan Grande Mussarela', 'A incomparável mussarela Pizza Hut, servida sobre molho de tomate especial.', NULL);
 INSERT INTO componente (e_produto, preco, titulo, descricao, id_pai) VALUES (TRUE , 12.0, 'Monte seu cachorro-quente gourmet!', '', NULL);

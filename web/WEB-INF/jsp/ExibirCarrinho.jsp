@@ -1,5 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="br.ufjf.dcc078.Modelo.Pedido"%>
 <%@page import="java.util.List"%>
 <%@page import="br.ufjf.dcc078.Modelo.Produto"%>
@@ -36,48 +37,31 @@
                                         <i class="glyphicon glyphicon-check"></i>
                                     </a>
                                     <label class="control-label col-lg-7"><c:out value="${prd.getNome()}"/></label>
-                                    <label class="text-danger control-label col-lg-2">R$ <c:out value="${prd.getPreco()}"/></label>
+                                    <label class="text-danger control-label col-lg-2">R$ <fmt:formatNumber pattern="#,##0.00" value="${prd.getPrecoTotal()}"/></label>
                                     <div class="col-lg-2">
                                         <input type="number" class="form-control" name="quantidade" value='<c:out value="${prd.getQuantidade()}"/>' />
                                     </div>
                                 </div>
                             </c:forEach>
-                            
+
+                            <div class="form-group row">
+                                <form class="form-inline" action="FrontController?action=AplicarPromocao" method="post">
+                                    <div class="form-group mx-sm-3 mb-2">
+                                        <label for="codigoPromo" class="sr-only">Código de Promoção</label>
+                                        <input type="text" class="form-control" name="codigoPromo" placeholder="Código de Promoção">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-2">Aplicar</button>
+                                    
+                                </form>
+                            </div>
+
                             <div class="text-center">
+                                <form class="form-horizontal" action="FrontController?action=FinalizarCompra" method="post">
                                 <button type="submit" class="btn btn-primary">
                                     Finalizar Compra    
                                 </button>
-                            </div><br>
-                            
-                            <%--<div class="col-lg-12">
-                                <form class="form-horizontal" action="FrontController?action=AdicionarProduto" method="post">
-                                    <c:forEach var="prd" items="${produto.getComponentes()}">
-                                        <div class="form-group row">
-                                            <a class="unlink col-lg-1" href=""> 
-                                                <i class="glyphicon glyphicon-check"></i>
-                                            </a>
-                                            <label class="control-label col-lg-7"><c:out value="${prd.getNome()}"/></label>
-                                            <label class="text-danger control-label col-lg-2">R$ <c:out value="${prd.getPreco()}"/></label>
-                                            <div class="col-lg-2">
-                                                <input type="number" class="form-control" name="quantidade" value="1" />
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-
-                                    <div class="text-center">
-                                        <div class="form-group">
-                                            <label class="control-label" for="quantidade">Quantidade:</label> 
-                                            <input type="number" class="form-control" name="quantidade" value="1" />
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">
-                                                Adicionar
-                                                <span class="badge">R$ <c:out value="${produto.getPreco()}"/></span>
-                                            </button>
-                                        </div>
-                                    </div><br>
                                 </form>
-                            </div>--%>
+                            </div><br>
                         </div><br>
                     </c:when>
                     <c:otherwise>

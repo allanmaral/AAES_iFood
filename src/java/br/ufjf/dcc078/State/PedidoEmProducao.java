@@ -6,7 +6,6 @@
 package br.ufjf.dcc078.State;
 
 import br.ufjf.dcc078.Modelo.Pedido;
-import java.util.Observable;
 
 /**
  *
@@ -42,6 +41,11 @@ public class PedidoEmProducao implements EstadoPedido{
     @Override
     public String getNome() {
         return "Em Produção";
+    }
+    
+    @Override
+    public String toString() {
+        return "Em Producao";
     }
     
 }

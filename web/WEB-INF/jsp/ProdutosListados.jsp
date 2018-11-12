@@ -1,5 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="br.ufjf.dcc078.Modelo.Pedido"%>
 <%@page import="java.util.List"%>
 <%@page import="br.ufjf.dcc078.Modelo.Produto"%>
@@ -30,7 +31,7 @@
                                     <br>
                                     <h4><c:out value="${produto.getNome()}"/></h4>
                                     <p><c:out value="${produto.getDescricao()}"/></p>    
-                                    <label class="text-success">R$ <c:out value="${produto.getPreco()}"/></label><br>
+                                    <label class="text-success">R$ <fmt:formatNumber pattern="#,##0.00" value="${produto.getPreco()}"/></label><br>
                                 </div><br>
                             </a>
                         </c:forEach>

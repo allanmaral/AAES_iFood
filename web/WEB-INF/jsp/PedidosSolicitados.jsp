@@ -16,9 +16,7 @@
         <th>Abertura</th>
         <th>Encerramento</th>
         <th>Total Pedido</th>
-        <th>Itens Solicitados</th>
-        <th>Add Produto</th>
-        <th>Fechar Pedido</th>  
+        <th>Itens Solicitados</th> 
         
         <c:choose>
             <c:when test="${not empty pedidos}">
@@ -29,8 +27,6 @@
                         <td>Horario de Encerramento</td>  
                         <td><label>R$ <c:out value="${pedido.getTotal()}"/></label></td>    
                         <td><a href="FrontController?action=ExibirPedido&id=<c:out value="${pedido.getId()}" />">Visualizar</a></td>
-                        <td><a href="">Adicionar</a></td>
-                        <td><a href=""><label>Finalizar Pedido</label></a></td>
                     </tr>
                 </c:forEach>
             </c:when>
