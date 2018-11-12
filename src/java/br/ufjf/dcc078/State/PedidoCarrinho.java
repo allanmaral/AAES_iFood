@@ -6,22 +6,24 @@
 package br.ufjf.dcc078.State;
 
 import br.ufjf.dcc078.Modelo.Pedido;
-import java.util.Observable;
 
 /**
  *
  * @author Gabriel Maia
  */
-public class PedidoCancelado implements EstadoPedido{
+public class PedidoCarrinho implements EstadoPedido{
 
+    public void PedidoAguardandoConfirmacao(){
+    }
+    
     @Override
     public void aguardarConfirmacao(Pedido pedido) {
-        System.out.println("Não é possível alcançar o estado.");
+        pedido.setEstado(new PedidoAguardandoConfirmacao());
     }
 
     @Override
     public void colocarEmProducao(Pedido pedido) {
-        System.out.println("Não é possível alcançar o estado.");
+        
     }
 
     @Override
@@ -38,14 +40,15 @@ public class PedidoCancelado implements EstadoPedido{
     public void cancelar(Pedido pedido) {
         pedido.setEstado(new PedidoCancelado());
     }
-    
+
     @Override
     public String getNome() {
-        return "Cancelado";
+        return "Carrinho";
     }
     
     @Override
     public String toString() {
-        return "Cancelado";
+        return "Carrinho";
     }
+    
 }

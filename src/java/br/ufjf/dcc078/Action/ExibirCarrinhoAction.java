@@ -5,14 +5,12 @@
  */
 package br.ufjf.dcc078.Action;
 
-import br.ufjf.dcc078.Modelo.ListaDePedidos;
+
 import br.ufjf.dcc078.Modelo.Pedido;
-import br.ufjf.dcc078.Modelo.Produto;
 import br.ufjf.dcc078.Modelo.Usuario;
 import br.ufjf.dcc078.Persistencia.PedidoDAO;
 import br.ufjf.dcc078.Servlet.Action;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

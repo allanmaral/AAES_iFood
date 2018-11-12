@@ -31,7 +31,6 @@ public class ControlePedidosAction implements Action{
             PedidoDAO.getInstance().saveCart(usuario);
         }
         
-        
         List<Pedido> pedidos = PedidoDAO.getInstance().readList(usuario);
         
         

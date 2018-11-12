@@ -28,7 +28,7 @@ public class PromocaoFactory {
             return null;
         }
         
-        if(!(objeto instanceof Action)) return null;
+        if(!(objeto instanceof Promocao)) return null;
         promocaoObject = (Promocao)objeto;
         return promocaoObject;
     }

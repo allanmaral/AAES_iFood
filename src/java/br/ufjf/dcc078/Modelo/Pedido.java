@@ -102,13 +102,29 @@ public class Pedido extends Observable {
         return this;
     }
 
-    public Double getTotal() {
-        Double total = 0.0;
+    public double getValorPedido() {
+        double total = 0.0;
 
-        for (Iterator<Componente> i = componentes.iterator(); i.hasNext();) {
-            Componente cp = i.next();
+        for (Iterator<Componente> it = componentes.iterator(); it.hasNext();) {
+            Componente cp = it.next();
             total += cp.getPrecoTotal();
         }
+        
+        return total;
+    }
+    
+    public double getValorDesconto() {
+        double desconto = 0.0;
+
+        if (getPromocao() != null) {
+            desconto = (1.0 - getPromocao().obterDesconto());
+        }
+
+        return getValorPedido() * desconto;
+    }
+    
+    public double getTotal() {
+        double total = getValorPedido();
 
         if (getPromocao() != null) {
             total *= getPromocao().obterDesconto();

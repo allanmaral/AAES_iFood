@@ -9,7 +9,7 @@ package br.ufjf.dcc078.Strategy;
  *
  * @author ice
  */
-public class DezPorCento implements Promocao {
+public class DezPorCento extends Promocao {
 
     @Override
     public double obterDesconto() {

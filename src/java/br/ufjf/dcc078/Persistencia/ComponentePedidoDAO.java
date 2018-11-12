@@ -85,19 +85,33 @@ public class ComponentePedidoDAO {
         }
     }
     
-    public void addComponent(int idPedido, Componente componente) throws
-            SQLException, ClassNotFoundException {
+    public void addComponent(int idPedido, Componente componente) {
         Connection conn = null;
         Statement st = null;
+        int quantidadeExistente = 0;
 
         try {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM componente_pedido WHERE (" 
+                    +  "id_componente = " + componente.getId() + " AND "
+                    +  "id_pedido = " + idPedido + ")");
+            
+            if(rs.next()) {
+                quantidadeExistente = rs.getInt("quantidade");
+                System.out.print("Já existe "+ quantidadeExistente +" desse componente, adicionando de novo");
+                st = conn.createStatement();
+                st.execute("DELETE FROM componente_pedido WHERE (" 
+                    +  "id_componente = " + componente.getId() + " AND "
+                    +  "id_pedido = " + idPedido + ")");
+            }
+            
             st = conn.createStatement();
             st.execute("insert into componente_pedido(id_componente, id_pedido, quantidade) "
                     + "values("
                     + componente.getId() + ", "
                     + idPedido + ", "
-                    + componente.getQuantidade() + ")"
+                    + (componente.getQuantidade() + quantidadeExistente) + ")"
             );
             
             if(componente.temSubProduto()) {
@@ -106,8 +120,8 @@ public class ComponentePedidoDAO {
                     addComponent(idPedido, it.next());
                 }
             }
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             closeResources(conn, st);
         }
@@ -127,7 +141,7 @@ public class ComponentePedidoDAO {
             if(rs.next()) {
                 componente.setQuantidade(rs.getInt("quantidade"));
                 
-                if(componente.temSubProduto()) {
+                if(componente.temSubProduto() && componente.getQuantidade() > 0) {
                     Produto prod = (Produto) componente;
                     for(Iterator<Componente> it = prod.getComponentes().iterator(); it.hasNext(); ) {
                         read(it.next(), pedido);
@@ -159,10 +173,10 @@ public class ComponentePedidoDAO {
                 Componente componente = ComponenteDAO.getInstance()
                                                      .readById(id_componente)
                                                      .setQuantidade(rs.getInt("quantidade"));
-                
-                read(componente, pedido);
-                
-                lista.add(componente);
+                if(componente.getQuantidade() > 0) {
+                    read(componente, pedido);                
+                    lista.add(componente);
+                }
             }
             
         } catch (SQLException | ClassNotFoundException e) {

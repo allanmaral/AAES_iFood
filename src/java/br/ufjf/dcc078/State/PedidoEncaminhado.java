@@ -44,4 +44,9 @@ public class PedidoEncaminhado implements EstadoPedido{
         return "Encaminhado";
     }
     
+    @Override
+    public String toString() {
+        return "Encaminhado";
+    }
+    
 }
