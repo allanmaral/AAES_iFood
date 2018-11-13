@@ -17,32 +17,37 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 <div class="container">    
 
     <div class="text-center">
-        <br/><h2>Estado do Pedido</h2><br>
+        <br/><h2>Trocar Estado dos Pedidos</h2><br>
     </div>
 
     <form action="FrontController?action=TrocarEstado" method="post">
 
         <div class="form-group">            
 
-            <label> Pedido</label>
-            
-            <select class="form-control">
+            <label> Pedido (ID)</label>
+            <select class="form-control">                
+                <!-- 
+                    TODO:
+                    Preencher select com pedidos
+                -->
+                <option value="" disabled selected>---------</option>                
                 <c:forEach var="pedido" items="${listaPedidos}">
                     <option value='<c:out value="${pedido.getId()}"/>' >
                         Pedido ID: <c:out value="${pedido.getId()}"/>
                     </option>
                 </c:forEach>                    
             </select>
-            
+
             <label >Estado</label>
             <select class="form-control">
+                <option value="" disabled selected>---------</option>
                 <option value="volvo">Cancelado</option>
                 <option value="saab">Em Produção</option>
                 <option value="mercedes">Encaminhado</option>
                 <option value="audi">Entregue</option>
             </select>           
- 
-       </div>           
+
+        </div>           
 
         <div class="text-center">          
             <button type="submit" class="btn btn-primary">Trocar Estado</button>
@@ -53,5 +58,6 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 
 
 </div>
+
 
 <%@include file="../jspf/rodape.jspf" %>
