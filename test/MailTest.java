@@ -14,6 +14,6 @@ import org.junit.Test;
 public class MailTest {
     @Test
     public void SendMail(){
-        MailService.getInstance().send("A test", "A test message!");
+        MailService.getInstance().send("allanmaralr@gmail.com", "A test", "A test message!");
     }
 }

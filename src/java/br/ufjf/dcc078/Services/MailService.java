@@ -45,7 +45,8 @@ public class MailService {
     }
     
     private Session openSession(Properties props){
-        Session session = Session.getDefaultInstance(props,
+        //Session session = Session.getDefaultInstance(props,
+        Session session = Session.getInstance(props,
             new javax.mail.Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() 
@@ -59,7 +60,7 @@ public class MailService {
         return session;
     }
     
-    public void send(String subject, String body){
+    public void send(String recipient, String subject, String body){
         
         try { 
             
@@ -68,7 +69,7 @@ public class MailService {
             mail.setFrom(new InternetAddress(MAIL_ADDRESS)); //Remetente
 
             Address[] toUser = InternetAddress //Destinatário(s)
-                       .parse("jonagabriel@gmail.com");  
+                       .parse(recipient);  
 
             mail.setRecipients(Message.RecipientType.TO, toUser);
             mail.setSubject(subject);//Assunto

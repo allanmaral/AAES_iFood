@@ -4,11 +4,8 @@ import br.ufjf.dcc078.Memento.MementoPedido;
 import br.ufjf.dcc078.State.EstadoPedido;
 import br.ufjf.dcc078.State.PedidoAguardandoConfirmacao;
 import br.ufjf.dcc078.Strategy.Promocao;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Observable;
 
 public class Pedido extends Observable {
@@ -70,6 +67,7 @@ public class Pedido extends Observable {
 
     public Pedido setUsuario(Usuario usuario) {
         this.usuario = usuario;
+        this.addObserver(usuario);
         return this;
     }
 
@@ -139,6 +137,11 @@ public class Pedido extends Observable {
         this.estado = estado;
         setChanged();
         notifyObservers();
+        return this;
+    }
+    
+    public Pedido loadEstado(EstadoPedido estado) {
+        this.estado = estado;
         return this;
     }
 

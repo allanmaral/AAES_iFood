@@ -131,8 +131,44 @@ public class PedidoDAO {
                 
                 pedido.setUsuario(usuario)
                       .setId(rs.getInt("id_pedido"))
-                      .setEstado(StateFactory.create(estado))
+                      .loadEstado(StateFactory.create(estado))
                       .setPromocao(promocao);
+                
+                pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
+                
+                lista.add(pedido);
+                
+            }
+            
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            closeResources(conn, st);
+        }
+        
+        return lista;
+    }
+    
+    public ArrayList<Pedido> readAll() {
+        ArrayList<Pedido> lista = new ArrayList<>();
+        Connection conn = null;
+        Statement st = null;
+        
+        try {
+            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            String sql = "SELECT * FROM pedido WHERE (estado <> 'Carrinho')";
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()) {
+                Promocao promocao = getPromocao(rs);
+                Usuario usuario = UsuarioDAO.getInstance().read(rs.getInt("id_usuario"));
+                
+                Pedido pedido = (new Pedido())
+                                .setUsuario(usuario)
+                                .setId(rs.getInt("id_pedido"))
+                                .loadEstado(StateFactory.create(rs.getString("estado")))
+                                .setPromocao(promocao);
                 
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
                 
@@ -162,14 +198,15 @@ public class PedidoDAO {
             
             if(rs.next()) {
                 Promocao promocao = getPromocao(rs);
+                Usuario usuario = UsuarioDAO.getInstance().read(rs.getInt("id_usuario"));
                 
                 String estado = rs.getString("estado");
                 
-                pedido = new Pedido();
-                
-                pedido.setId(rs.getInt("id_pedido"))
-                      .setEstado(StateFactory.create(estado))
-                      .setPromocao(promocao);
+                pedido = (new Pedido())
+                         .setUsuario(usuario)
+                         .setId(rs.getInt("id_pedido"))
+                         .loadEstado(StateFactory.create(estado))
+                         .setPromocao(promocao);
                 
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
             }
@@ -213,12 +250,11 @@ public class PedidoDAO {
                 Promocao promocao = getPromocao(rs);
                 String estado = rs.getString("estado");
                 
-                pedido = new Pedido();
-                
-                pedido.setUsuario(usuario)
-                      .setId(rs.getInt("id_pedido"))
-                      .setEstado(StateFactory.create(estado))
-                      .setPromocao(promocao);
+                pedido = (new Pedido())
+                          .setUsuario(usuario)
+                          .setId(rs.getInt("id_pedido"))
+                          .loadEstado(StateFactory.create(estado))
+                          .setPromocao(promocao);
                 
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
             }
@@ -239,8 +275,8 @@ public class PedidoDAO {
         try {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into pedido(id_usuario, estado) "
-                    + "values("
+            st.execute("INSERT INTO pedido(id_usuario, estado) "
+                    + "VALUES("
                     + usuario.getId() + ", "
                     + "'Carrinho')"
             );

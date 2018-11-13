@@ -5,20 +5,12 @@
  */
 package br.ufjf.dcc078.Action;
 
-import br.ufjf.dcc078.Modelo.Adicional;
-import br.ufjf.dcc078.Modelo.Componente;
 import br.ufjf.dcc078.Modelo.Pedido;
-import br.ufjf.dcc078.Modelo.Produto;
 import br.ufjf.dcc078.Modelo.Usuario;
-import br.ufjf.dcc078.Persistencia.ComponenteDAO;
-import br.ufjf.dcc078.Persistencia.ComponentePedidoDAO;
+import br.ufjf.dcc078.Pagamento.Pagamento;
 import br.ufjf.dcc078.Persistencia.PedidoDAO;
 import br.ufjf.dcc078.Servlet.Action;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -41,9 +33,12 @@ public class FinalizarCompraAction implements Action{
         request.setAttribute("carrinho", carrinho);
         
         // PROCESSAR PAGAMENTO
+        Pagamento cadeiaDePagamento = usuario.getPreferenciasPagamento();
         
-        carrinho.aguardarConfirmacao();
-        PedidoDAO.getInstance().updateState(carrinho);        
+        if(cadeiaDePagamento.processarPagamento(carrinho)) {
+            carrinho.aguardarConfirmacao();
+            PedidoDAO.getInstance().updateState(carrinho);
+        }
         
         RequestDispatcher despachante = request.getRequestDispatcher("FrontController?action=ExibirPedido&id=" + carrinho.getId());
         despachante.forward(request, response);

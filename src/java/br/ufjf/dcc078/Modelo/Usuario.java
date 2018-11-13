@@ -45,55 +45,61 @@ public class Usuario implements Observer{
         return id;
     }
 
-    public void setId(Integer id) {
+    public Usuario setId(Integer id) {
         this.id = id;
+        return this;
     }
     
     public String getNomeCompleto() {
         return nomeCompleto;
     }
 
-    public void setNomeCompleto(String nomeCompleto) {
+    public Usuario setNomeCompleto(String nomeCompleto) {
         this.nomeCompleto = nomeCompleto;
+        return this;
     }
 
     public String getNomeUsuario() {
         return nomeUsuario;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
+    public Usuario setNomeUsuario(String nomeUsuario) {
         this.nomeUsuario = nomeUsuario;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Usuario setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public Usuario setSenha(String senha) {
         this.senha = senha;
+        return this;
     }
 
     public Pagamento getPreferenciasPagamento() {
         return preferenciasPagamento;
     }
 
-    public void setPreferenciasPagamento(Pagamento preferenciasPagamento) {
+    public Usuario setPreferenciasPagamento(Pagamento preferenciasPagamento) {
         this.preferenciasPagamento = preferenciasPagamento;
+        return this;
     }
     
     @Override
     public void update(Observable o, Object arg) {
         if(o instanceof Pedido){
             Pedido pedido = (Pedido) o;
-            MailService.getInstance().send("Pedido no AAES Food", "Status: " + pedido.getEstado().getNome());
+            MailService.getInstance().send(this.getEmail(), "Pedido no AAES Food", "Status: " + pedido.getEstado().getNome());
         }
     }    
 }

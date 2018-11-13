@@ -25,7 +25,7 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
         <div class="form-group">            
 
             <label> Pedido (ID)</label>
-            <select class="form-control">                
+            <select name="pedido" class="form-control">                
                 <!-- 
                     TODO:
                     Preencher select com pedidos
@@ -34,17 +34,19 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
                 <c:forEach var="pedido" items="${listaPedidos}">
                     <option value='<c:out value="${pedido.getId()}"/>' >
                         Pedido ID: <c:out value="${pedido.getId()}"/>
+                        (<c:out value="${pedido.getEstado().getNome()}"/>)
                     </option>
                 </c:forEach>                    
             </select>
 
             <label >Estado</label>
-            <select class="form-control">
+            <select name="estado" class="form-control">
                 <option value="" disabled selected>---------</option>
-                <option value="volvo">Cancelado</option>
-                <option value="saab">Em Produção</option>
-                <option value="mercedes">Encaminhado</option>
-                <option value="audi">Entregue</option>
+                <option value="aguardarConfirmacao">Aguardando Confirmação</option>
+                <option value="colocarEmProducao">Em Produção</option>
+                <option value="encaminhar">Encaminhado</option>
+                <option value="entregar">Entregue</option>
+                <option value="cancelar">Cancelado</option>
             </select>           
 
         </div>           
