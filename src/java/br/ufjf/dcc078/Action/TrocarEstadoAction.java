@@ -16,13 +16,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author douglas
  */
-public class CadastroPedidoAction implements Action {
+public class TrocarEstadoAction implements Action {
 
     private RequestDispatcher despachante;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
-        despachante = request.getRequestDispatcher("WEB-INF/jsp/AdicionarPedido.jsp");
+        despachante = request.getRequestDispatcher("WEB-INF/jsp/TrocarEstadoPedido.jsp");
         despachante.forward(request, response);
     }
 
