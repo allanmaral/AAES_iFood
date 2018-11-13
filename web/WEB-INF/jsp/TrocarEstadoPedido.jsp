@@ -20,7 +20,7 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
         <br/><h2>Estados do Pedidos</h2><br>
     </div>
 
-    <form action="FrontController?action=TrocaEstados" method="post">
+    <form action="FrontController?action=TrocarEstado" method="post">
 
         <div class="form-group">            
 
