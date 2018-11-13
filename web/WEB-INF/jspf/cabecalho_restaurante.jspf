@@ -18,21 +18,18 @@
     <body>
 
         <div class="jumbotron text-center" style="margin-bottom:0">
-            <h1>IFOOD</h1>        
+            <h1>Restaurante</h1>        
         </div>
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <a class="navbar-brand" href="FrontController?action=ListarProdutos">Faça já o seu pedido!</a>
+            <a class="navbar-brand" href="FrontController?action=ListarProdutos">Troca de Estados Pedido!</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="FrontController?action=ControlePedidos">Meus Pedidos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href='FrontController?action=ExibirCarrinho'>Carrinho</a>
+                        <a class="nav-link" href="FrontController?action=ControlePedidos">Sessão Usuários</a>
                     </li>
                 </ul>
             </div>  

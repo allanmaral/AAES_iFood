@@ -12,12 +12,12 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-<%@include file="../jspf/cabecalho.jspf" %>
+<%@include file="../jspf/cabecalho_restaurante.jspf" %>
 
 <div class="container">    
 
     <div class="text-center">
-        <br/><h2>Estados do Pedidos</h2><br>
+        <br/><h2>Estado do Pedido</h2><br>
     </div>
 
     <form action="FrontController?action=TrocarEstado" method="post">
@@ -54,4 +54,4 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 
 </div>
 
-<%@include file="../jspf/rodape.jspf" %>
+<%@include file="../jspf/rodape_restaurante.jspf" %>
