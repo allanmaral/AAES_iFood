@@ -24,41 +24,50 @@
             <h1>IFOOD</h1>        
         </div>
 
-        <div class="text-center central">          
+        <div class="central">          
 
             <div class="row">
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title">Usuários</h2>
-                            <p class="card-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
+                            <h2 class="card-title text-center">Usuários</h2>
+                            <p class="card-text">
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                             </p>
-                            <a href="FrontController?action=ControlePedidos" class="btn btn-primary">Ir</a>
+                            <div class="text-center">
+                                <a href="FrontController?action=ControlePedidos" class="btn btn-primary">Ir</a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title">Restaurante</h2>
-                            <p class="card-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
+                            <h2 class="card-title text-center">Restaurante</h2>
+                            <p class="card-text">
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                             </p>
-                            <a href="FrontController?action=TrocarEstado" class="btn btn-primary">Ir</a>
+                            <div class="text-center">
+                                <a href="FrontController?action=TrocarEstado" class="btn btn-primary ">Ir</a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
-            <div class="jumbotron text-center" style="margin-bottom:0">
-                <label>Desenvolvido por: </label><br>
-                Douglas Baumgratz de Carvalho<br>
-                Jonas<br>
-                Allan Amaral<br>
-                Aspectos Avançados em Engenharia de Software - UFJF
-            </div>
+        <div class="jumbotron text-center" style="margin-bottom:0">
+            <label>Desenvolvido por: </label><br>
+            Douglas Baumgratz de Carvalho<br>
+            Jonas<br>
+            Allan Amaral<br>
+            Aspectos Avançados em Engenharia de Software - UFJF
+        </div>
 
     </body>
 </html>
