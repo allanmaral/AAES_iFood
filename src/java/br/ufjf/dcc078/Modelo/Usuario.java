@@ -5,6 +5,10 @@
  */
 package br.ufjf.dcc078.Modelo;
 
+import br.ufjf.dcc078.Pagamento.Pagamento;
+import br.ufjf.dcc078.Pagamento.PagamentoCartao;
+import br.ufjf.dcc078.Pagamento.PagamentoDinheiro;
+import br.ufjf.dcc078.Pagamento.PagamentoRefeicao;
 import br.ufjf.dcc078.Services.MailService;
 import java.util.Observable;
 import java.util.Observer;
@@ -19,13 +23,22 @@ public class Usuario implements Observer{
     private String nomeUsuario;
     private String email;
     private String senha;
-
+    private Pagamento preferenciasPagamento;
+    
     public Usuario(Integer id, String nome_completo, String nome_usuario, String email, String senha) {
         this.id = id;
         this.nomeCompleto = nome_completo;
         this.nomeUsuario = nome_usuario;
         this.email = email;
         this.senha = senha;
+  
+        //teste chain of responsability  
+        this.setPreferenciasPagamento(new PagamentoCartao(new PagamentoRefeicao(new PagamentoDinheiro())));
+    }
+
+    public Usuario() {
+        //teste chain of responsability  
+        this.setPreferenciasPagamento(new PagamentoCartao(new PagamentoRefeicao(new PagamentoDinheiro())));
     }
 
     public Integer getId() {
@@ -35,7 +48,6 @@ public class Usuario implements Observer{
     public void setId(Integer id) {
         this.id = id;
     }
-
     
     public String getNomeCompleto() {
         return nomeCompleto;
@@ -69,11 +81,19 @@ public class Usuario implements Observer{
         this.senha = senha;
     }
 
+    public Pagamento getPreferenciasPagamento() {
+        return preferenciasPagamento;
+    }
+
+    public void setPreferenciasPagamento(Pagamento preferenciasPagamento) {
+        this.preferenciasPagamento = preferenciasPagamento;
+    }
+    
     @Override
     public void update(Observable o, Object arg) {
         if(o instanceof Pedido){
             Pedido pedido = (Pedido) o;
             MailService.getInstance().send("Pedido no AAES Food", "Status: " + pedido.getEstado().getNome());
         }
-    } 
+    }    
 }

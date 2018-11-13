@@ -51,8 +51,6 @@ public class Pedido extends Observable {
         return this;
     }
 
-    
-
     public void addLista(Produto p) {
         this.componentes.add(p);
     }

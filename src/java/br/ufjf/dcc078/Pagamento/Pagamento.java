@@ -18,6 +18,10 @@ public abstract class Pagamento {
     public Pagamento() {
         this.sucessor = null;
     }
+    
+    public Pagamento(Pagamento sucessor){
+        this.sucessor = sucessor;
+    }
 
     public Pagamento getSucessor() {
         return sucessor;
@@ -39,7 +43,7 @@ public abstract class Pagamento {
         return resultado;        
     }
     
-    Boolean processarPagamento(Pedido pedido) {
+    public Boolean processarPagamento(Pedido pedido) {
         if(!pagar(pedido)) {
             if(sucessor != null) {
                 return sucessor.processarPagamento(pedido);
