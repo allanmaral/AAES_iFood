@@ -21,7 +21,7 @@
     <body>
 
         <div class="jumbotron text-center" style="margin-bottom:0">
-            <h1>IFOOD</h1>        
+            <h1>CENTRAL</h1>        
         </div>
 
         <div class="central">          
