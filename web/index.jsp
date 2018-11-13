@@ -13,15 +13,18 @@
                 height: 200px;
                 background: #aaa;
             }
+            .central{
+                padding: 50px;
+            }
         </style>
     </head>
     <body>
 
         <div class="jumbotron text-center" style="margin-bottom:0">
             <h1>IFOOD</h1>        
-        </div><br/>
+        </div>
 
-        <div class="card text-center">          
+        <div class="text-center central">          
 
             <div class="row">
                 <div class="col-sm-6">
@@ -34,7 +37,7 @@
                             <a href="FrontController?action=ControlePedidos" class="btn btn-primary">Ir</a>
                         </div>
                     </div>
-                </div><br/>
+                </div>
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
@@ -46,8 +49,9 @@
                         </div>
                     </div>
                 </div>
-            </div><br/>
-
+            </div>
+            
+        </div>
             <div class="jumbotron text-center" style="margin-bottom:0">
                 <label>Desenvolvido por: </label><br>
                 Douglas Baumgratz de Carvalho<br>
