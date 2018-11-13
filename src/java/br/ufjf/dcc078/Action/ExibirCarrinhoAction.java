@@ -21,10 +21,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author allan
  */
 public class ExibirCarrinhoAction implements Action{
+    private Usuario usuario = new Usuario(2, "Douglas Baumgratz", "doug", "allanmaralr@gmail.com", "123");
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
-        Usuario usuario = new Usuario(2, "Douglas Baumgratz", "doug", "douglas@gmail.com", "123");
         Pedido carrinho = PedidoDAO.getInstance().readCart(usuario);
         request.setAttribute("carrinho", carrinho);
         

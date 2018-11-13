@@ -166,10 +166,10 @@ public class Pedido extends Observable {
     }
 
     public MementoPedido save() {
-        return new MementoPedido(this.estado);
+        return new MementoPedido(this.estado).setId(id);
     }
 
     public void restore(MementoPedido m) {
-        this.estado = m.getEstadoPedido();
+        this.estado = m.getEstado();
     }
 }

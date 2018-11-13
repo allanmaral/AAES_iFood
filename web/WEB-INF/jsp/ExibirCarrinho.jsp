@@ -26,16 +26,6 @@
                 <c:choose>
                     <c:when test="${not empty carrinho}">
                         <div class="border-top border-bottom">
-                            <br>         
-                            <label>Preço total: </label>
-                            <label class="text-success">R$ <fmt:formatNumber pattern="#,##0.00" value="${carrinho.getTotal()}"/></label><br>
-                            <c:choose>
-                                <c:when test="${not empty carrinho.getPromocao()}">
-                                    <label>Código Promocional: </label>
-                                    <label><c:out value="${carrinho.getPromocao().obterCodigo()}" /></label>
-                                    <label class="text-success">( -R$ <fmt:formatNumber pattern="#,##0.00" value="${carrinho.getValorDesconto()}"/>)</label><br>
-                                </c:when>
-                            </c:choose>
                             <br>
                             <h5>Conteudo</h5>
                             <c:forEach var="prd" items="${carrinho.getLista()}">
@@ -70,6 +60,19 @@
                                 </form>
                             </div><br>
                         </div><br>
+                        
+                        <div class="text-right">
+                            <c:choose>
+                                <c:when test="${not empty carrinho.getPromocao()}">
+                                    <label>Código Promocional: </label>
+                                    <label><c:out value="${carrinho.getPromocao().obterCodigo()}" /></label>
+                                    <label class="text-success">( -R$ <fmt:formatNumber pattern="#,##0.00" value="${carrinho.getValorDesconto()}"/>)</label><br>
+                                </c:when>
+                            </c:choose>
+                            <label>Preço total: </label>
+                            <label class="text-success">R$ <fmt:formatNumber pattern="#,##0.00" value="${carrinho.getTotal()}"/></label><br>
+                        </div>
+                            
                     </c:when>
                     <c:otherwise>
 

@@ -33,11 +33,12 @@ public abstract class Pagamento {
     
     public Boolean pagar(Pedido pedido) {
         Boolean resultado = false;
-        // Gerar nota fiscal
-        // TODO
-        
+                
         if(autenticarPagamento()){
             resultado = true;
+            // Gerar nota fiscal
+            pedido.getUsuario().enviarEmail("Nota Fiscal AAES", 
+                                "Email referente a nota fiscal do pedido #" + pedido.getId());
         }
         
         return resultado;        

@@ -1,3 +1,4 @@
+DROP TABLE memento_pedido;
 DROP TABLE componente_pedido;
 DROP TABLE pedido;
 DROP TABLE usuario;
@@ -27,6 +28,14 @@ CREATE TABLE pedido (
     FOREIGN KEY (id_promocao) REFERENCES promocao(id_promocao) ON DELETE CASCADE
 );
 
+CREATE TABLE memento_pedido (
+    id_memento INTEGER NOT NULL,
+    data_alteracao TIMESTAMP NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id_memento, data_alteracao),
+    FOREIGN KEY (id_memento) REFERENCES pedido(id_pedido) ON DELETE CASCADE
+);
+
 CREATE TABLE componente (
     id_componente INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     e_produto BOOLEAN NOT NULL,
@@ -46,9 +55,9 @@ CREATE TABLE componente_pedido (
     FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) ON DELETE CASCADE
 );
 
-INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Admin', 'admin', 'admin@gmail.com', 'admin');
-INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Douglas Baumgratz', 'doug', 'douglas@gmail.com', '123');
-INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Jonas', 'jon', 'jonas@gmail.com', '123');
+INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Admin', 'admin', 'allanmaralr@gmail.com', 'admin');
+INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Douglas Baumgratz', 'doug', 'allanmaralr@gmail.com', '123');
+INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Jonas', 'jon', 'allanmaralr@gmail.com', '123');
 INSERT INTO usuario(nome_completo, nome_usuario, email, senha) VALUES ('Allan', 'all', 'allanmaralr@gmail.com', '123');
 
 INSERT INTO promocao(codigo, nome) VALUES ('COMPRAEMDOBRO', 'CompraDobro');

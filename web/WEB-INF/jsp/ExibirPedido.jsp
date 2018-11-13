@@ -31,20 +31,23 @@
                             <c:choose>
                                 <c:when test="${idPedido != -1}">
                                     <label>Status do pedido: </label>
-                                    <label class="text-danger"><c:out value="${pedido.getEstado().getNome()}"/></label>
+                                    <label class="text-danger"><c:out value="${pedido.getEstado().getNome()}"/></label><br>
+                                    <c:choose>
+                                        <c:when test="${not empty historico}">
+                                            <c:forEach var="item" items="${historico}">
+                                                <label class="text-success">
+                                                    <c:out value="${item.getEstado().getNome()}"/> 
+                                                    (<c:out value="${item.getTimestamp().getHours()}"/> : 
+                                                     <c:out value="${item.getTimestamp().getMinutes()}"/> - 
+                                                     <c:out value="${item.getTimestamp().getDay()}"/>/<c:out value="${item.getTimestamp().getMonth()}"/>/<c:out value="${item.getTimestamp().getYear()+1900}"/>)
+                                                </label><br>
+                                            </c:forEach>
+                                        </c:when>
+                                    </c:choose>
                                     <br>
                                 </c:when>
                             </c:choose>
          
-                            <label>Preço total: </label>
-                            <label class="text-success">R$ <fmt:formatNumber pattern="#,##0.00" value="${pedido.getTotal()}"/></label><br>
-                            <c:choose>
-                                <c:when test="${not empty pedido.getPromocao()}">
-                                    <label>Código Promocional: </label>
-                                    <label><c:out value="${pedido.getPromocao().obterCodigo()}" /></label>
-                                    <label class="text-success">( -R$ <fmt:formatNumber pattern="#,##0.00" value="${pedido.getValorDesconto()}"/>)</label><br>
-                                </c:when>
-                            </c:choose>
                             <br>
                             <h5>Conteudo do Pedido</h5>
                             <c:forEach var="prd" items="${pedido.getLista()}">
@@ -69,37 +72,19 @@
                                     </div><br>
                                 </c:when>
                             </c:choose>
-                            
-                            <%--<div class="col-lg-12">
-                                <form class="form-horizontal" action="FrontController?action=AdicionarProduto" method="post">
-                                    <c:forEach var="prd" items="${produto.getComponentes()}">
-                                        <div class="form-group row">
-                                            <a class="unlink col-lg-1" href=""> 
-                                                <i class="glyphicon glyphicon-check"></i>
-                                            </a>
-                                            <label class="control-label col-lg-7"><c:out value="${prd.getNome()}"/></label>
-                                            <label class="text-danger control-label col-lg-2">R$ <c:out value="${prd.getPreco()}"/></label>
-                                            <div class="col-lg-2">
-                                                <input type="number" class="form-control" name="quantidade" value="1" />
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-
-                                    <div class="text-center">
-                                        <div class="form-group">
-                                            <label class="control-label" for="quantidade">Quantidade:</label> 
-                                            <input type="number" class="form-control" name="quantidade" value="1" />
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">
-                                                Adicionar
-                                                <span class="badge">R$ <c:out value="${produto.getPreco()}"/></span>
-                                            </button>
-                                        </div>
-                                    </div><br>
-                                </form>
-                            </div>--%>
+                 
                         </div><br>
+                        <div class="text-right">
+                            <label>Preço total: </label>
+                            <label class="text-success">R$ <fmt:formatNumber pattern="#,##0.00" value="${pedido.getTotal()}"/></label><br>
+                            <c:choose>
+                                <c:when test="${not empty pedido.getPromocao()}">
+                                    <label>Código Promocional: </label>
+                                    <label><c:out value="${pedido.getPromocao().obterCodigo()}" /></label>
+                                    <label class="text-success">( -R$ <fmt:formatNumber pattern="#,##0.00" value="${pedido.getValorDesconto()}"/>)</label><br>
+                                </c:when>
+                            </c:choose>
+                        </div>
                     </c:when>
                     <c:otherwise>
 

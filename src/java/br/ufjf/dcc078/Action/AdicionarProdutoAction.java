@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author allan
  */
 public class AdicionarProdutoAction implements Action{
+    private Usuario usuario = new Usuario(2, "Douglas Baumgratz", "doug", "allanmaralr@gmail.com", "123");
     
     private void montarComponente(Componente componente, HttpServletRequest request) {
         int quantidade = 0;
@@ -52,7 +53,6 @@ public class AdicionarProdutoAction implements Action{
          * QUANDO A ESTRUTURA DE BANCO DE DADOS ESTIVER BEM DEFINIDA, AQUI VIRÁ
          * A BUSCA DO PRODUTO PELO ID RECEBIDO
          */
-        Usuario usuario = new Usuario(2, "Douglas Baumgratz", "doug", "douglas@gmail.com", "123");
         Pedido carrinho = PedidoDAO.getInstance().readCart(usuario);
         request.setAttribute("carrinho", carrinho);
         

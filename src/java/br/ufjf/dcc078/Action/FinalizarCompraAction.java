@@ -21,14 +21,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author allan
  */
 public class FinalizarCompraAction implements Action{
+    private Usuario usuario = new Usuario(2, "Douglas Baumgratz", "doug", "allanmaralr@gmail.com", "123");
+    
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
-        /* ESSE É UM CÓDIGO TEMPORARIO
-         * QUANDO A ESTRUTURA DE BANCO DE DADOS ESTIVER BEM DEFINIDA, AQUI VIRÁ
-         * A BUSCA DO PRODUTO PELO ID RECEBIDO
-         */
-        Usuario usuario = new Usuario(2, "Douglas Baumgratz", "doug", "douglas@gmail.com", "123");
+        
         Pedido carrinho = PedidoDAO.getInstance().readCart(usuario);
         request.setAttribute("carrinho", carrinho);
         

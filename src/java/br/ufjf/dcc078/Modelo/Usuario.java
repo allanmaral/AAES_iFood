@@ -95,6 +95,10 @@ public class Usuario implements Observer{
         return this;
     }
     
+    public void enviarEmail(String assunto, String conteudo) {
+        MailService.getInstance().send(this.getEmail(), assunto, conteudo);
+    }
+    
     @Override
     public void update(Observable o, Object arg) {
         if(o instanceof Pedido){

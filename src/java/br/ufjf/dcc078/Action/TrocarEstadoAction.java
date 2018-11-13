@@ -5,7 +5,9 @@
  */
 package br.ufjf.dcc078.Action;
 
+import br.ufjf.dcc078.Memento.MementoPedido;
 import br.ufjf.dcc078.Modelo.Pedido;
+import br.ufjf.dcc078.Persistencia.MementoPedidoDAO;
 import br.ufjf.dcc078.Persistencia.PedidoDAO;
 import br.ufjf.dcc078.Servlet.Action;
 import java.io.IOException;
@@ -31,6 +33,7 @@ public class TrocarEstadoAction implements Action {
         if(idPedidoStr != null) {
             int idPedido = Integer.parseInt(idPedidoStr);
             Pedido pedidoSelecionado = PedidoDAO.getInstance().readById(idPedido);
+            MementoPedido memento = pedidoSelecionado.save();
             
             if(methodName != null) {
                 try {
@@ -40,6 +43,7 @@ public class TrocarEstadoAction implements Action {
                     method.invoke(pedidoSelecionado);
                     
                     PedidoDAO.getInstance().updateState(pedidoSelecionado);
+                    MementoPedidoDAO.getInstance().save(memento);
                 
                 } catch (SecurityException | 
                          IllegalArgumentException | 
