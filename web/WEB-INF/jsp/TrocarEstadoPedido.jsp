@@ -60,4 +60,4 @@ on Libraries node in Projects view can be used to add the JSTL 1.1 library.
 </div>
 
 
-<%@include file="../jspf/rodape.jspf" %>
+<%@include file="../jspf/rodape_restaurante.jspf" %>
