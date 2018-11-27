@@ -36,7 +36,7 @@
                                     <label class="control-label col-lg-7"><c:out value="${prd.getNome()}"/></label>
                                     <label class="text-danger control-label col-lg-2">R$ <fmt:formatNumber pattern="#,##0.00" value="${prd.getPrecoTotal()}"/></label>
                                     <div class="col-lg-2">
-                                        <input type="number" class="form-control" name="quantidade" value='<c:out value="${prd.getQuantidade()}"/>' />
+                                        <input type="number" readonly class="form-control" name="quantidade" value='<c:out value="${prd.getQuantidade()}"/>' />
                                     </div>
                                 </div>
                             </c:forEach>
@@ -55,7 +55,7 @@
                             <div class="text-center">
                                 <form class="form-horizontal" action="FrontController?action=FinalizarCompra" method="post">
                                 <button type="submit" class="btn btn-primary">
-                                    Finalizar Compra    
+                                    Finalizar em um Click    
                                 </button>
                                 </form>
                             </div><br>

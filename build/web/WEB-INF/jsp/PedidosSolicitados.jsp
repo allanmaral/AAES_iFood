@@ -13,8 +13,6 @@
     </div>
     <table border = 1 class="table table-dark table-striped text-center">        
         <th>Situação</th>
-        <th>Abertura</th>
-        <th>Encerramento</th>
         <th>Total Pedido</th>
         <th>Itens Solicitados</th> 
         
@@ -22,9 +20,7 @@
             <c:when test="${not empty pedidos}">
                 <c:forEach var="pedido" items="${pedidos}">
                     <tr>                            
-                        <td><c:out value="${pedido.getEstado().getNome()}"/></td>            
-                        <td>Horario de abertura</td>
-                        <td>Horario de Encerramento</td>  
+                        <td><c:out value="${pedido.getEstado().getNome()}"/></td>
                         <td><label>R$ <c:out value="${pedido.getTotal()}"/></label></td>    
                         <td><a href="FrontController?action=ExibirPedido&id=<c:out value="${pedido.getId()}" />">Visualizar</a></td>
                     </tr>
