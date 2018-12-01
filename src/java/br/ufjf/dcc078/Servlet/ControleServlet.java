@@ -17,8 +17,6 @@ public class ControleServlet extends HttpServlet {
 
     private RequestDispatcher despachante;
     private List<Pedido> pedidos = new ListaDePedidos().getInstance();    
-    //private List<Produto> produto;
-    //private Pedido pedido;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

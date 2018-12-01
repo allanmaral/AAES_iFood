@@ -3,13 +3,6 @@ package br.ufjf.dcc078.Modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-/****
- * 
- * @author allan
- * 
- * ESSA CLASSE É APENAS PARA TESTAR FUNCIONALIDADES DA PARTE WEB E DEVARÁ SER
- * REMOVIDA DEPOIS QUE A FUNCIONALIDADE ESTIVER BEM DEFINIDA
- */
 public class ListaDeProdutos {
 
     private static List<Produto> produtos;

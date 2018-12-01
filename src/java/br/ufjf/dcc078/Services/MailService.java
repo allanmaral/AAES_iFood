@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufjf.dcc078.Services;
 import java.util.Properties;
 import javax.mail.Address;
@@ -14,10 +9,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-/**
- *
- * @author Gabriel Maia
- */
 public class MailService {
     
     private static final String MAIL_ADDRESS = "tpaaesufjf@gmail.com";  
@@ -45,7 +36,6 @@ public class MailService {
     }
     
     private Session openSession(Properties props){
-        //Session session = Session.getDefaultInstance(props,
         Session session = Session.getInstance(props,
             new javax.mail.Authenticator() {
                 @Override
@@ -66,16 +56,15 @@ public class MailService {
             
             Message mail = new MimeMessage(this.openSession(this.getConfigurationProperties()));
             
-            mail.setFrom(new InternetAddress(MAIL_ADDRESS)); //Remetente
+            mail.setFrom(new InternetAddress(MAIL_ADDRESS));
 
-            Address[] toUser = InternetAddress //Destinatário(s)
+            Address[] toUser = InternetAddress 
                        .parse(recipient);  
 
             mail.setRecipients(Message.RecipientType.TO, toUser);
-            mail.setSubject(subject);//Assunto
+            mail.setSubject(subject);
             mail.setText(body);
             
-            /**Método para enviar a mensagem criada*/
             Transport.send(mail);
 
             System.out.println("E-mail enviado! \n Assunto: " + subject + "  \n Corpo da mensagem: " + body);

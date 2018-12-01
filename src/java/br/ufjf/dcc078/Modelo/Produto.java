@@ -3,10 +3,6 @@ package br.ufjf.dcc078.Modelo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- *
- * @author douglas
- */
 public class Produto extends Componente {
     
     private ArrayList<Componente> componentes;

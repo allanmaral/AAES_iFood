@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufjf.dcc078.Memento;
 
 import br.ufjf.dcc078.State.EstadoPedido;
 import java.sql.Timestamp;
 
-/**
- *
- * @author Gabriel Maia
- */
 public class MementoPedido {
     
     private int id;
@@ -56,7 +47,5 @@ public class MementoPedido {
     public MementoPedido setDataAlteracao(long dataAlteracao) {
         this.dataAlteracao = dataAlteracao;
         return this;
-    }
-    
-    
+    }   
 }
