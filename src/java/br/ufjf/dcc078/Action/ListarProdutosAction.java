@@ -1,8 +1,6 @@
 package br.ufjf.dcc078.Action;
 
 import br.ufjf.dcc078.Modelo.Componente;
-import br.ufjf.dcc078.Modelo.ListaDeProdutos;
-import br.ufjf.dcc078.Modelo.Produto;
 import br.ufjf.dcc078.Persistencia.ComponenteDAO;
 import br.ufjf.dcc078.Servlet.Action;
 import java.io.IOException;

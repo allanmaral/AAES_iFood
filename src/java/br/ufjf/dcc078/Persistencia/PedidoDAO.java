@@ -1,6 +1,5 @@
 package br.ufjf.dcc078.Persistencia;
 
-import br.ufjf.dcc078.Modelo.Componente;
 import br.ufjf.dcc078.Modelo.Pedido;
 import br.ufjf.dcc078.Modelo.Usuario;
 import br.ufjf.dcc078.State.StateFactory;

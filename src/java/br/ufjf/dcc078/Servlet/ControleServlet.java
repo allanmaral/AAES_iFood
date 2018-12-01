@@ -2,7 +2,6 @@ package br.ufjf.dcc078.Servlet;
 
 import br.ufjf.dcc078.Modelo.ListaDePedidos;
 import br.ufjf.dcc078.Modelo.Pedido;
-import br.ufjf.dcc078.Modelo.Produto;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;

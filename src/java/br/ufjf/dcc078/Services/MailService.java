@@ -15,7 +15,7 @@ public class MailService {
     
     private static final String MAIL_PASSWORD = "ufjf2018"; 
     
-    private static final MailService instance = new MailService();
+    private static MailService instance = new MailService();
     
     private MailService(){};
     

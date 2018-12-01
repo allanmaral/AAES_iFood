@@ -1,7 +1,5 @@
 package br.ufjf.dcc078.State;
 
-import br.ufjf.dcc078.Servlet.*;
-
 public class StateFactory {
     public static EstadoPedido create(String action) {
         EstadoPedido estadoObject = null;

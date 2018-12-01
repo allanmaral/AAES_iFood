@@ -1,6 +1,5 @@
 package br.ufjf.dcc078.Modelo;
 
-import br.ufjf.dcc078.Modelo.Pedido;
 import java.util.ArrayList;
 import java.util.List;
 

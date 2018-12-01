@@ -1,8 +1,5 @@
 package br.ufjf.dcc078.Strategy;
 
-import br.ufjf.dcc078.State.*;
-import br.ufjf.dcc078.Servlet.*;
-
 public class PromocaoFactory {
     public static Promocao create(String action) {
         Promocao promocaoObject = null;
