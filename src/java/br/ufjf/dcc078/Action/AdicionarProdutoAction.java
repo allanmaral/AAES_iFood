@@ -5,7 +5,6 @@
  */
 package br.ufjf.dcc078.Action;
 
-import br.ufjf.dcc078.Modelo.Adicional;
 import br.ufjf.dcc078.Modelo.Componente;
 import br.ufjf.dcc078.Modelo.Pedido;
 import br.ufjf.dcc078.Modelo.Produto;
@@ -15,10 +14,7 @@ import br.ufjf.dcc078.Persistencia.ComponentePedidoDAO;
 import br.ufjf.dcc078.Persistencia.PedidoDAO;
 import br.ufjf.dcc078.Servlet.Action;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +26,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AdicionarProdutoAction implements Action{
     private Usuario usuario = new Usuario(2, "Douglas Baumgratz", "doug", "allanmaralr@gmail.com", "123");
+    
+    
+    
     
     private void montarComponente(Componente componente, HttpServletRequest request) {
         int quantidade = 0;
@@ -49,10 +48,6 @@ public class AdicionarProdutoAction implements Action{
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
-        /* ESSE É UM CÓDIGO TEMPORARIO
-         * QUANDO A ESTRUTURA DE BANCO DE DADOS ESTIVER BEM DEFINIDA, AQUI VIRÁ
-         * A BUSCA DO PRODUTO PELO ID RECEBIDO
-         */
         Pedido carrinho = PedidoDAO.getInstance().readCart(usuario);
         request.setAttribute("carrinho", carrinho);
         
@@ -63,7 +58,6 @@ public class AdicionarProdutoAction implements Action{
         montarComponente(componente, request);
         
         ComponentePedidoDAO.getInstance().addComponent(carrinho.getId(), componente);
-        
         
         RequestDispatcher despachante = request.getRequestDispatcher("FrontController?action=ExibirCarrinho");
         despachante.forward(request, response);

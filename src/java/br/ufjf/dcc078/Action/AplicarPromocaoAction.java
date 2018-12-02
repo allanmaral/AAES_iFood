@@ -35,10 +35,6 @@ public class AplicarPromocaoAction implements Action{
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ClassNotFoundException {
-        /* ESSE É UM CÓDIGO TEMPORARIO
-         * QUANDO A ESTRUTURA DE BANCO DE DADOS ESTIVER BEM DEFINIDA, AQUI VIRÁ
-         * A BUSCA DO PRODUTO PELO ID RECEBIDO
-         */
         Pedido carrinho = PedidoDAO.getInstance().readCart(usuario);
         request.setAttribute("carrinho", carrinho);
         
