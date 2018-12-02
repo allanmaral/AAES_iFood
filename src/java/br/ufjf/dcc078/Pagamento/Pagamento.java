@@ -55,6 +55,5 @@ public abstract class Pagamento {
         String mensagem = "Email referente a nota fiscal do pedido #" + pedido.getId();
         pedido.getUsuario().enviarEmail(titulo, mensagem);
     }
-
-    
+   
 }

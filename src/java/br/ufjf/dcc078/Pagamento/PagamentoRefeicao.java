@@ -11,7 +11,6 @@ public class PagamentoRefeicao extends Pagamento {
 
     @Override
     Boolean autenticarPagamento() {
-        // VALIDA O PAGAMENTO COM O SERVIDOR EXTERNO
         return true;
     }
     
