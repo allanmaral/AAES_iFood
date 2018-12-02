@@ -23,10 +23,9 @@ public class MailService {
         return instance;
     }
     
-    private Properties getConfigurationProperties(){
+    private Properties getMailConfigurationProperties(){
         Properties props = new Properties();
         
-        /** Parâmetros de conexão com servidor Gmail */
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
@@ -54,7 +53,7 @@ public class MailService {
         
         try { 
             
-            Message mail = new MimeMessage(this.openSession(this.getConfigurationProperties()));
+            Message mail = new MimeMessage(this.openSession(this.getMailConfigurationProperties()));
             
             mail.setFrom(new InternetAddress(MAIL_ADDRESS));
 
