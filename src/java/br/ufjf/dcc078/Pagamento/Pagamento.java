@@ -27,9 +27,7 @@ public abstract class Pagamento {
                 
         if(autenticarPagamento()){
             resultado = true;
-            // Gerar nota fiscal
-            pedido.getUsuario().enviarEmail("Nota Fiscal AAES", 
-                                "Email referente a nota fiscal do pedido #" + pedido.getId());
+            gerarNotaFiscal(pedido);
         }
         
         return resultado;        
@@ -51,6 +49,12 @@ public abstract class Pagamento {
     }
     
     abstract Boolean autenticarPagamento();
+
+    private void gerarNotaFiscal(Pedido pedido) {
+        String titulo = "Nota Fiscal AAES";
+        String mensagem = "Email referente a nota fiscal do pedido #" + pedido.getId();
+        pedido.getUsuario().enviarEmail(titulo, mensagem);
+    }
 
     
 }
