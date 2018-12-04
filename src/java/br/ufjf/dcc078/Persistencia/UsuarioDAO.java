@@ -57,7 +57,7 @@ public class UsuarioDAO {
                 email = rs.getString("email");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ComponentePedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return email;
     }
@@ -79,7 +79,7 @@ public class UsuarioDAO {
                         .setSenha(rs.getString("email"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ComponentePedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return usuario;
