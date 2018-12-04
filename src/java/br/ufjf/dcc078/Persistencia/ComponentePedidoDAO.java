@@ -9,10 +9,8 @@ import br.ufjf.dcc078.Modelo.Componente;
 import br.ufjf.dcc078.Modelo.Pedido;
 import br.ufjf.dcc078.Modelo.Produto;
 import br.ufjf.dcc078.Modelo.Usuario;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -83,19 +81,16 @@ public class ComponentePedidoDAO {
             }
         }
     }
-}
 
-private void read(Componente componente, Pedido pedido) {
-        Connection conn = null;
-        Statement st = null;
+    private void read(Componente componente, Pedido pedido) {
+        
+        ResultSet rs = DatabaseLocator.executarQuery(
+                  "SELECT * FROM componente_pedido "
+                + "WHERE (id_pedido = " + pedido.getId()
+                + " AND "
+                + "id_componente = " + componente.getId() + " )");
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            String sql = "SELECT * FROM componente_pedido WHERE (id_pedido = " + pedido.getId() + " AND "
-                    + "id_componente = " + componente.getId() + " )";
-            ResultSet rs = st.executeQuery(sql);
-
             if (rs.next()) {
                 componente.setQuantidade(rs.getInt("quantidade"));
 
@@ -103,35 +98,24 @@ private void read(Componente componente, Pedido pedido) {
                     Produto prod = (Produto) componente;
                     for (Iterator<Componente> it = prod.getComponentes().iterator(); it.hasNext();) {
                         read(it.next(), pedido);
-                    
-
-
-
-}
+                    }
                 }
             }
-
-        } catch (SQLException | ClassNotFoundException e) {
-            Logger.getLogger(ComponenteDAO.class
-
-.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            closeResources(conn, st);
+        } catch (SQLException e) {
+            Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     ArrayList<Componente> readListByOrder(Pedido pedido) {
         ArrayList<Componente> lista = new ArrayList<>();
-        Connection conn = null;
-        Statement st = null;
+        
+        ResultSet rs = DatabaseLocator.executarQuery(
+                  "SELECT * FROM componente_pedido "
+                + "WHERE (id_pedido = " + pedido.getId() + " "
+                + "AND id_componente in ( "
+                    + "SELECT id_componente FROM componente WHERE (id_pai IS NULL) ))");
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            String sql = "SELECT * FROM componente_pedido WHERE (id_pedido = " + pedido.getId() + " AND "
-                    + "id_componente in ( SELECT id_componente FROM componente WHERE (id_pai IS NULL) ))";
-            ResultSet rs = st.executeQuery(sql);
-
             while (rs.next()) {
                 int id_componente = rs.getInt("id_componente");
                 Componente componente = ComponenteDAO.getInstance()
@@ -140,21 +124,11 @@ private void read(Componente componente, Pedido pedido) {
                 if (componente.getQuantidade() > 0) {
                     read(componente, pedido);
                     lista.add(componente);
-                
-
-
-
-}
+                }
             }
-
-        } catch (SQLException | ClassNotFoundException e) {
-            Logger.getLogger(ComponenteDAO.class
-
-.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            closeResources(conn, st);
+        } catch (SQLException e) {
+            Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         }
-
         return lista;
     }
 }
