@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 
 public class DatabaseLocator {
     private static DatabaseLocator instance = new DatabaseLocator();
+    private static Connection connection = null;
+    private static Statement statement = null;
     
     private DatabaseLocator() {};
     
@@ -30,44 +32,40 @@ public class DatabaseLocator {
         return conn;
     }
     
-    public static ResultSet executarQuery(String comando) 
-            {
-        Connection conn = null;
-        Statement stmt = null;
+    public ResultSet executarQuery(String comando) {
         ResultSet rs = null;
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(comando);
+            connection = (Connection) DatabaseLocator.getInstance().getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(comando);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DatabaseLocator.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, stmt);
         }
         return rs;
     }
     
-    public static void executarStatement(String comando) {
-        Connection conn = null;
-        Statement stmt = null;
+    public void executarStatement(String comando) {
+        System.out.println(comando);
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
-            stmt = conn.createStatement();
-            stmt.execute(comando);
+            connection = (Connection) DatabaseLocator.getInstance().getConnection();
+            statement = connection.createStatement();
+            statement.execute(comando);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DatabaseLocator.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            closeResources(conn, stmt);
+            closeResources();
         }
     }
     
-    public static void closeResources(Connection conn, Statement st) {
+    public void closeResources() {
         try {
-            if (st != null) {
-                st.close();
+            if (statement != null) {
+                statement.close();
+                statement = null;
             }
-            if (conn != null) {
-                conn.close();
+            if (statement != null) {
+                connection.close();
+                connection = null;
             }
         } catch (SQLException e) {
             e.printStackTrace();

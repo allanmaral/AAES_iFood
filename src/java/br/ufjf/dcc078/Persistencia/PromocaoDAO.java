@@ -25,11 +25,11 @@ public class PromocaoDAO {
     public String read(Promocao promocao) throws
             SQLException, ClassNotFoundException {
         String desconto = null;
-        String comando = "select desconto from promocao where codigo= '%"
-                + promocao.obterCodigo()
-                + "%'";
 
-        ResultSet rs = DatabaseLocator.executarQuery(comando);
+        ResultSet rs = DatabaseLocator.getInstance().executarQuery(
+                "select desconto from promocao where codigo= '%"
+                + promocao.obterCodigo()
+                + "%'");
 
         try {
             while (rs.next()) {
@@ -38,16 +38,17 @@ public class PromocaoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        DatabaseLocator.getInstance().closeResources();
+        
         return desconto;
-
     }
 
     public Promocao read(String codigo) {
         Promocao promocao = null;
-        String comando = "SELECT * FROM promocao "
-                + "WHERE codigo = '" + codigo + "'";
 
-        ResultSet rs = DatabaseLocator.executarQuery(comando);
+        ResultSet rs = DatabaseLocator.getInstance().executarQuery(
+                  "SELECT * FROM promocao "
+                + "WHERE codigo = '" + codigo + "'");
 
         try {
             if (rs.next()) {
@@ -57,16 +58,17 @@ public class PromocaoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        DatabaseLocator.getInstance().closeResources();
 
         return promocao;
     }
 
     public Promocao read(int id) {
         Promocao promocao = null;
-        String comando = "SELECT * FROM promocao "
-                + "WHERE id_promocao =  " + id;
 
-        ResultSet rs = DatabaseLocator.executarQuery(comando);
+        ResultSet rs = DatabaseLocator.getInstance().executarQuery(
+                  "SELECT * FROM promocao "
+                + "WHERE id_promocao =  " + id);
 
         try {
             if (rs.next()) {
@@ -76,6 +78,7 @@ public class PromocaoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        DatabaseLocator.getInstance().closeResources();
 
         return promocao;
     }

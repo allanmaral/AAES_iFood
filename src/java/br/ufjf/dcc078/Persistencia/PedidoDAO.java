@@ -40,7 +40,7 @@ public class PedidoDAO {
         String comando = "insert into pedido(titulo) "
                 + "values('"
                 + pedido.getTitulo() + "') '";
-        DatabaseLocator.executarStatement(comando);
+        DatabaseLocator.getInstance().executarStatement(comando);
     }
 
     public void update(Pedido pedido) {

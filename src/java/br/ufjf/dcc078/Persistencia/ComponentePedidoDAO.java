@@ -38,7 +38,7 @@ public class ComponentePedidoDAO {
                 + pedido.getTitulo() + "', '"
                 + pedido.getStatus() + "', '"
                 + pedido.getPromocao() + "')";
-        DatabaseLocator.executarStatement(comando);
+        DatabaseLocator.getInstance().executarStatement(comando);
     }
 
     public String read(Usuario usuario) {
@@ -48,7 +48,7 @@ public class ComponentePedidoDAO {
                 + usuario.getId()
                 + "%'";
 
-        ResultSet rs = DatabaseLocator.executarQuery(comando);
+        ResultSet rs = DatabaseLocator.getInstance().executarQuery(comando);
 
         try {
             while (rs.next()) {
@@ -57,21 +57,45 @@ public class ComponentePedidoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ComponentePedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        DatabaseLocator.getInstance().closeResources();
         return id_pedido;
+    }
+    
+    public void updateComponentePedido(int idPedido, Componente componente) {
+        DatabaseLocator.getInstance().executarStatement(
+                        "UPDATE componente_pedido "
+                      + "SET quantidade = " + componente.getQuantidade() + " "
+                      + "WHERE (id_componente = " + componente.getId() + " AND "
+                      + "       id_pedido = " + idPedido + ")");
+    }
+    
+    public void insertComponentePedido(int idPedido, Componente componente) {
+        DatabaseLocator.getInstance().executarStatement(
+                        "INSERT INTO componente_pedido (id_componente, id_pedido, quantidade) "
+                      + "VALUES ( " + componente.getId() + ", "
+                      + idPedido + ", "
+                      + componente.getQuantidade() + ")");
     }
 
     public void addComponent(int idPedido, Componente componente) {
-        int quantidadeExistente = 0;
-
-        DatabaseLocator.executarStatement(
-                  "INSERT INTO componente_pedido (id_componente, id_pedido, quantidade) "
-                + "VALUES("
-                + componente.getId() + ", "
-                + idPedido + ", "
-                + (componente.getQuantidade() + quantidadeExistente) + ") "
-                + "ON DUPLICATE KEY UPDATE quantidade="
-                + (componente.getQuantidade() + quantidadeExistente));
+        
+        ResultSet rs = DatabaseLocator.getInstance().executarQuery(
+                              "SELECT * FROM componente_pedido "
+                            + "WHERE (id_componente = " + componente.getId() + " AND "
+                            + "       id_pedido = " + idPedido + ")");
+        
+        try {
+            if(rs.next()) {
+                componente.setQuantidade(componente.getQuantidade() + rs.getInt("quantidade"));
+                updateComponentePedido(idPedido, componente);
+            } else {
+                insertComponentePedido(idPedido, componente);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ComponentePedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DatabaseLocator.getInstance().closeResources();
 
          
         if (componente.temSubProduto()) {
@@ -84,7 +108,7 @@ public class ComponentePedidoDAO {
 
     private void read(Componente componente, Pedido pedido) {
         
-        ResultSet rs = DatabaseLocator.executarQuery(
+        ResultSet rs = DatabaseLocator.getInstance().executarQuery(
                   "SELECT * FROM componente_pedido "
                 + "WHERE (id_pedido = " + pedido.getId()
                 + " AND "
@@ -104,12 +128,13 @@ public class ComponentePedidoDAO {
         } catch (SQLException e) {
             Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         }
+        DatabaseLocator.getInstance().closeResources();
     }
 
     ArrayList<Componente> readListByOrder(Pedido pedido) {
         ArrayList<Componente> lista = new ArrayList<>();
         
-        ResultSet rs = DatabaseLocator.executarQuery(
+        ResultSet rs = DatabaseLocator.getInstance().executarQuery(
                   "SELECT * FROM componente_pedido "
                 + "WHERE (id_pedido = " + pedido.getId() + " "
                 + "AND id_componente in ( "
@@ -129,6 +154,8 @@ public class ComponentePedidoDAO {
         } catch (SQLException e) {
             Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         }
+        DatabaseLocator.getInstance().closeResources();
+        
         return lista;
     }
 }
