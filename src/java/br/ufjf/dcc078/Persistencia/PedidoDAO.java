@@ -37,23 +37,12 @@ public class PedidoDAO {
 
     public void save(Pedido pedido) throws
             SQLException, ClassNotFoundException {
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("insert into pedido(titulo) "
-                    + "values('"
-                    + pedido.getTitulo() + "') '"
-            );
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
+        String comando = "insert into pedido(titulo) "
+                + "values('"
+                + pedido.getTitulo() + "') '";
+        DatabaseLocator.executarStatement(comando);
     }
-    
+
     public void update(Pedido pedido) {
         Connection conn = null;
         Statement st = null;
@@ -62,14 +51,14 @@ public class PedidoDAO {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "UPDATE pedido "
-                       + "SET estado = '" + pedido.getEstado().toString() + "' ";
-            if(pedido.getPromocao() != null) {
-                sql += ", id_promocao = " + pedido.getPromocao().getId()+ " "; 
+                    + "SET estado = '" + pedido.getEstado().toString() + "' ";
+            if (pedido.getPromocao() != null) {
+                sql += ", id_promocao = " + pedido.getPromocao().getId() + " ";
             }
             sql += "WHERE id_pedido = " + pedido.getId();
-            
+
             st.execute(sql);
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -104,115 +93,115 @@ public class PedidoDAO {
             closeResources(conn, stmt);
         }
     }
-    
+
     public ArrayList<Pedido> readList(Usuario usuario) {
         ArrayList<Pedido> lista = new ArrayList<>();
         Connection conn = null;
         Statement st = null;
-        
+
         try {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM pedido WHERE (id_usuario = " + usuario.getId() + " AND estado <> 'Carrinho')";
             ResultSet rs = st.executeQuery(sql);
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 Promocao promocao = getPromocao(rs);
                 String estado = rs.getString("estado");
-                
+
                 Pedido pedido = new Pedido();
-                
+
                 pedido.setUsuario(usuario)
-                      .setId(rs.getInt("id_pedido"))
-                      .loadEstado(StateFactory.create(estado))
-                      .setPromocao(promocao);
-                
+                        .setId(rs.getInt("id_pedido"))
+                        .loadEstado(StateFactory.create(estado))
+                        .setPromocao(promocao);
+
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
-                
+
                 lista.add(pedido);
-                
+
             }
-            
+
         } catch (SQLException | ClassNotFoundException e) {
             Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             closeResources(conn, st);
         }
-        
+
         return lista;
     }
-    
+
     public ArrayList<Pedido> readAll() {
         ArrayList<Pedido> lista = new ArrayList<>();
         Connection conn = null;
         Statement st = null;
-        
+
         try {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM pedido WHERE (estado <> 'Carrinho')";
             ResultSet rs = st.executeQuery(sql);
-            
-            while(rs.next()) {
+
+            while (rs.next()) {
                 Promocao promocao = getPromocao(rs);
                 Usuario usuario = UsuarioDAO.getInstance().read(rs.getInt("id_usuario"));
-                
+
                 Pedido pedido = (new Pedido())
-                                .setUsuario(usuario)
-                                .setId(rs.getInt("id_pedido"))
-                                .loadEstado(StateFactory.create(rs.getString("estado")))
-                                .setPromocao(promocao);
-                
+                        .setUsuario(usuario)
+                        .setId(rs.getInt("id_pedido"))
+                        .loadEstado(StateFactory.create(rs.getString("estado")))
+                        .setPromocao(promocao);
+
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
-                
+
                 lista.add(pedido);
-                
+
             }
-            
+
         } catch (SQLException | ClassNotFoundException e) {
             Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             closeResources(conn, st);
         }
-        
+
         return lista;
     }
-    
+
     public Pedido readById(int id) {
         Pedido pedido = null;
         Connection conn = null;
         Statement st = null;
-        
+
         try {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM pedido WHERE (id_pedido = " + id + ")";
             ResultSet rs = st.executeQuery(sql);
-            
-            if(rs.next()) {
+
+            if (rs.next()) {
                 Promocao promocao = getPromocao(rs);
                 Usuario usuario = UsuarioDAO.getInstance().read(rs.getInt("id_usuario"));
-                
+
                 String estado = rs.getString("estado");
-                
+
                 pedido = (new Pedido())
-                         .setUsuario(usuario)
-                         .setId(rs.getInt("id_pedido"))
-                         .loadEstado(StateFactory.create(estado))
-                         .setPromocao(promocao);
-                
+                        .setUsuario(usuario)
+                        .setId(rs.getInt("id_pedido"))
+                        .loadEstado(StateFactory.create(estado))
+                        .setPromocao(promocao);
+
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
             }
-            
+
         } catch (SQLException | ClassNotFoundException e) {
             Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             closeResources(conn, st);
         }
-        
+
         return pedido;
     }
-    
+
     public void closeResources(Connection conn, Statement st) {
         try {
             if (st != null) {
@@ -230,34 +219,34 @@ public class PedidoDAO {
         Pedido pedido = null;
         Connection conn = null;
         Statement st = null;
-        
+
         try {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM pedido "
-                       + "WHERE (id_usuario = " + usuario.getId() + 
-                                " AND estado = 'Carrinho' )";
+                    + "WHERE (id_usuario = " + usuario.getId()
+                    + " AND estado = 'Carrinho' )";
             ResultSet rs = st.executeQuery(sql);
-            
-            if(rs.next()) {
+
+            if (rs.next()) {
                 Promocao promocao = getPromocao(rs);
                 String estado = rs.getString("estado");
-                
+
                 pedido = (new Pedido())
-                          .setUsuario(usuario)
-                          .setId(rs.getInt("id_pedido"))
-                          .loadEstado(StateFactory.create(estado))
-                          .setPromocao(promocao);
-                
+                        .setUsuario(usuario)
+                        .setId(rs.getInt("id_pedido"))
+                        .loadEstado(StateFactory.create(estado))
+                        .setPromocao(promocao);
+
                 pedido.setLista(ComponentePedidoDAO.getInstance().readListByOrder(pedido));
             }
-            
+
         } catch (SQLException | ClassNotFoundException e) {
             Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             closeResources(conn, st);
         }
-        
+
         return pedido;
     }
 
@@ -279,31 +268,31 @@ public class PedidoDAO {
             closeResources(conn, st);
         }
     }
-    
+
     public void updateState(Pedido pedido) {
         Connection conn = null;
         Statement st = null;
-        
+
         try {
             conn = (Connection) DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            String sql = "UPDATE pedido " 
-                       + "SET estado = '" + pedido.getEstado().toString() + "' "
-                       + "WHERE id_pedido = " + pedido.getId();
+            String sql = "UPDATE pedido "
+                    + "SET estado = '" + pedido.getEstado().toString() + "' "
+                    + "WHERE id_pedido = " + pedido.getId();
             st.execute(sql);
-                        
+
         } catch (SQLException | ClassNotFoundException e) {
             Logger.getLogger(ComponenteDAO.class.getName()).log(Level.SEVERE, null, e);
         } finally {
             closeResources(conn, st);
         }
     }
-    
+
     private Promocao getPromocao(ResultSet rs) throws SQLException {
         Promocao promocao = null;
         int idPromo = 0;
         idPromo = rs.getInt("id_promocao");
-        if(!rs.wasNull()){
+        if (!rs.wasNull()) {
             promocao = PromocaoDAO.getInstance().read(idPromo);
         }
         return promocao;
