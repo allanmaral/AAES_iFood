@@ -51,7 +51,7 @@ public class DatabaseLocator {
         return rs;
     }
     
-    public static void excutarStatement(String comando) {
+    public static void executarStatement(String comando) {
         Connection conn = null;
         Statement stmt = null;
         try {

@@ -40,7 +40,7 @@ public class ComponentePedidoDAO {
                 + pedido.getTitulo() + "', '"
                 + pedido.getStatus() + "', '"
                 + pedido.getPromocao() + "')";
-        DatabaseLocator.excutarStatement(comando);
+        DatabaseLocator.executarStatement(comando);
     }
 
     public String read(Usuario usuario) {
@@ -66,7 +66,7 @@ public class ComponentePedidoDAO {
     public void addComponent(int idPedido, Componente componente) {
         int quantidadeExistente = 0;
 
-        DatabaseLocator.excutarStatement(
+        DatabaseLocator.executarStatement(
                   "INSERT INTO componente_pedido (id_componente, id_pedido, quantidade) "
                 + "VALUES("
                 + componente.getId() + ", "

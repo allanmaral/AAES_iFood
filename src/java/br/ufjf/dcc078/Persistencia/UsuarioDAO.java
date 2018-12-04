@@ -32,96 +32,58 @@ public class UsuarioDAO {
 
     public void save(Usuario usuario) throws
             SQLException, ClassNotFoundException {
-        Connection conn = null;
-        Statement st = null;
 
-        try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("insert into usuario(nomeCompleto, nomeUsuario, email, senha) "
-                    + "values('"
-                    + usuario.getNomeCompleto() + "','"
-                    + usuario.getNomeUsuario() + "', '"
-                    + usuario.getEmail() + "', '"
-                    + usuario.getSenha() + "')"
-            );
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, st);
-        }
+        String comando = "insert into usuario(nomeCompleto, nomeUsuario, email, senha) "
+                + "values('"
+                + usuario.getNomeCompleto() + "','"
+                + usuario.getNomeUsuario() + "', '"
+                + usuario.getEmail() + "', '"
+                + usuario.getSenha() + "')";
+        DatabaseLocator.executarStatement(comando);
+
     }
 
     public String read(Usuario usuario) throws
             SQLException, ClassNotFoundException {
-        Connection conn = null;
-        Statement stmt = null;
         String email = null;
+        String comando = "select email from usuario where nome_completo like '%"
+                + usuario.getNomeCompleto()
+                + "%'";
+
+        ResultSet rs = DatabaseLocator.executarQuery(comando);
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
-            stmt = conn.createStatement();
-
-            String query = "select email from usuario where nome_completo like '%"
-                    + usuario.getNomeCompleto()
-                    + "%'";
-
-            ResultSet rs = stmt.executeQuery(query);
-
             while (rs.next()) {
                 email = rs.getString("email");
             }
-
-            return email;
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            closeResources(conn, stmt);
+        } catch (SQLException ex) {
+            Logger.getLogger(ComponentePedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return email;
     }
-    
-    public Usuario read(int idUsuario) {
-        Connection conn = null;
-        Statement stmt = null;
+
+    public Usuario read(int idUsuario) throws
+            SQLException, ClassNotFoundException {
         Usuario usuario = null;
+        String comando = "SELECT * FROM usuario "
+                + "WHERE id_usuario = " + idUsuario;
+
+        ResultSet rs = DatabaseLocator.executarQuery(comando);
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
-            stmt = conn.createStatement();
-
-            String query = "SELECT * FROM usuario "
-                         + "WHERE id_usuario = " + idUsuario;
-
-            ResultSet rs = stmt.executeQuery(query);
-
             if (rs.next()) {
                 usuario = (new Usuario())
-                          .setNomeCompleto(rs.getString("nome_completo"))
-                          .setNomeUsuario(rs.getString("nome_usuario"))
-                          .setEmail(rs.getString("email"))
-                          .setSenha(rs.getString("email"));
+                        .setNomeCompleto(rs.getString("nome_completo"))
+                        .setNomeUsuario(rs.getString("nome_usuario"))
+                        .setEmail(rs.getString("email"))
+                        .setSenha(rs.getString("email"));
             }
-            
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, stmt);
+        } catch (SQLException ex) {
+            Logger.getLogger(ComponentePedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return usuario;
     }
 
-    public void closeResources(Connection conn, Statement st) {
-        try {
-            if (st != null) {
-                st.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
 }
