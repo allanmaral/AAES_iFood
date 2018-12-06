@@ -40,7 +40,7 @@ public class PedidoDAO {
         String comando = "insert into pedido(titulo) "
                 + "values('"
                 + pedido.getTitulo() + "') '";
-        DatabaseLocator.getInstance().executarStatement(comando);
+        DatabaseMananger.getInstance().executarStatement(comando);
     }
 
     public void update(Pedido pedido) {
@@ -48,7 +48,7 @@ public class PedidoDAO {
         Statement st = null;
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "UPDATE pedido "
                     + "SET estado = '" + pedido.getEstado().toString() + "' ";
@@ -73,7 +73,7 @@ public class PedidoDAO {
         String id_pedido = null;
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             stmt = conn.createStatement();
 
             String query = "select id_pedido from pedido where id_usuario = '%"
@@ -100,7 +100,7 @@ public class PedidoDAO {
         Statement st = null;
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM pedido WHERE (id_usuario = " + usuario.getId() + " AND estado <> 'Carrinho')";
             ResultSet rs = st.executeQuery(sql);
@@ -137,7 +137,7 @@ public class PedidoDAO {
         Statement st = null;
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM pedido WHERE (estado <> 'Carrinho')";
             ResultSet rs = st.executeQuery(sql);
@@ -173,7 +173,7 @@ public class PedidoDAO {
         Statement st = null;
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM pedido WHERE (id_pedido = " + id + ")";
             ResultSet rs = st.executeQuery(sql);
@@ -221,7 +221,7 @@ public class PedidoDAO {
         Statement st = null;
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM pedido "
                     + "WHERE (id_usuario = " + usuario.getId()
@@ -255,7 +255,7 @@ public class PedidoDAO {
         Statement st = null;
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("INSERT INTO pedido(id_usuario, estado) "
                     + "VALUES("
@@ -274,7 +274,7 @@ public class PedidoDAO {
         Statement st = null;
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "UPDATE pedido "
                     + "SET estado = '" + pedido.getEstado().toString() + "' "

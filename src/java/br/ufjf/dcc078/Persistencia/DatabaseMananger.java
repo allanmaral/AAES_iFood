@@ -13,14 +13,14 @@ import java.util.logging.Logger;
  * @author douglas
  */
 
-public class DatabaseLocator {
-    private static DatabaseLocator instance = new DatabaseLocator();
+public class DatabaseMananger {
+    private static DatabaseMananger instance = new DatabaseMananger();
     private static Connection connection = null;
     private static Statement statement = null;
     
-    private DatabaseLocator() {};
+    private DatabaseMananger() {};
     
-    public static DatabaseLocator getInstance(){
+    public static DatabaseMananger getInstance(){
         return instance;
     }
     
@@ -35,11 +35,11 @@ public class DatabaseLocator {
     public ResultSet executarQuery(String comando) {
         ResultSet rs = null;
         try {
-            connection = (Connection) DatabaseLocator.getInstance().getConnection();
+            connection = (Connection) DatabaseMananger.getInstance().getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(comando);
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(DatabaseLocator.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseMananger.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;
     }
@@ -47,11 +47,11 @@ public class DatabaseLocator {
     public void executarStatement(String comando) {
         System.out.println(comando);
         try {
-            connection = (Connection) DatabaseLocator.getInstance().getConnection();
+            connection = (Connection) DatabaseMananger.getInstance().getConnection();
             statement = connection.createStatement();
             statement.execute(comando);
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(DatabaseLocator.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseMananger.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources();
         }

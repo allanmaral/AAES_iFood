@@ -32,7 +32,7 @@ public class ComponenteDAO {
         Statement st = null;
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("INSERT INTO componente (e_produto, preco, titulo, descricao, id_pai)"
                     + "VALUES("
@@ -76,7 +76,7 @@ public class ComponenteDAO {
         Statement st = null;
         
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM componente WHERE (id_pai IS NULL)";
             ResultSet rs = st.executeQuery(sql);
@@ -100,7 +100,7 @@ public class ComponenteDAO {
         Statement st = null;
         
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM componente WHERE (id_pai = " + id + ")";
             ResultSet rs = st.executeQuery(sql);
@@ -124,7 +124,7 @@ public class ComponenteDAO {
         Componente comp = null;
         
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM componente WHERE (id_componente = " + id + ")";
             ResultSet rs = st.executeQuery(sql);
@@ -148,7 +148,7 @@ public class ComponenteDAO {
         Componente comp = null;
         
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM componente WHERE (id_pai = " + id + ")";
             ResultSet rs = st.executeQuery(sql);
@@ -173,7 +173,7 @@ public class ComponenteDAO {
         String id_pedido = null;
 
         try {
-            conn = (Connection) DatabaseLocator.getInstance().getConnection();
+            conn = (Connection) DatabaseMananger.getInstance().getConnection();
             stmt = conn.createStatement();
 
             String query = "select id_pedido from pedido where id_usuario = '%"

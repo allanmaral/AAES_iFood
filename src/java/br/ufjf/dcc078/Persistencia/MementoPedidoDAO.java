@@ -33,7 +33,7 @@ public class MementoPedidoDAO {
         Statement st = null;
         try
         {
-            conn= DatabaseLocator.getInstance().getConnection();
+            conn= DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             
             Timestamp timestamp = new Timestamp(memento.getDataAlteracao());
@@ -54,7 +54,7 @@ public class MementoPedidoDAO {
         Statement st = null;
         try
         {
-            conn= DatabaseLocator.getInstance().getConnection();
+            conn= DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
 
             Timestamp timestamp = new Timestamp(dataAlt);
@@ -83,7 +83,7 @@ public class MementoPedidoDAO {
         Statement st = null;
         
         try {
-            conn = DatabaseLocator.getInstance().getConnection();
+            conn = DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             String sql = "SELECT * FROM memento_pedido WHERE id_memento=" + pedido.getId();
             ResultSet rs = st.executeQuery(sql);
@@ -112,7 +112,7 @@ public class MementoPedidoDAO {
         Statement st = null;
         try
         {
-            conn= DatabaseLocator.getInstance().getConnection();
+            conn= DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
 
             st.execute("DELETE FROM memento_pedido WHERE id_memento=" + idAluno);
@@ -129,7 +129,7 @@ public class MementoPedidoDAO {
         boolean hasNewer = false;
         try
         {
-            conn= DatabaseLocator.getInstance().getConnection();
+            conn= DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             Timestamp timestamp = new Timestamp(memento.getDataAlteracao());
             ResultSet rs = st.executeQuery("SELECT * FROM memento_pedido WHERE id_memento=" + memento.getId() +
@@ -151,7 +151,7 @@ public class MementoPedidoDAO {
         Statement st = null;
         try
         {
-            conn= DatabaseLocator.getInstance().getConnection();
+            conn= DatabaseMananger.getInstance().getConnection();
             st = conn.createStatement();
             Timestamp timestamp = new Timestamp(memento.getDataAlteracao());
             st.execute("DELETE FROM memento_pedido WHERE id_memento=" + memento.getId() +

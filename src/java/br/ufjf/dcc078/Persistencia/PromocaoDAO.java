@@ -26,7 +26,7 @@ public class PromocaoDAO {
             SQLException, ClassNotFoundException {
         String desconto = null;
 
-        ResultSet rs = DatabaseLocator.getInstance().executarQuery(
+        ResultSet rs = DatabaseMananger.getInstance().executarQuery(
                 "select desconto from promocao where codigo= '%"
                 + promocao.obterCodigo()
                 + "%'");
@@ -38,7 +38,7 @@ public class PromocaoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DatabaseLocator.getInstance().closeResources();
+        DatabaseMananger.getInstance().closeResources();
         
         return desconto;
     }
@@ -46,7 +46,7 @@ public class PromocaoDAO {
     public Promocao read(String codigo) {
         Promocao promocao = null;
 
-        ResultSet rs = DatabaseLocator.getInstance().executarQuery(
+        ResultSet rs = DatabaseMananger.getInstance().executarQuery(
                   "SELECT * FROM promocao "
                 + "WHERE codigo = '" + codigo + "'");
 
@@ -58,7 +58,7 @@ public class PromocaoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DatabaseLocator.getInstance().closeResources();
+        DatabaseMananger.getInstance().closeResources();
 
         return promocao;
     }
@@ -66,7 +66,7 @@ public class PromocaoDAO {
     public Promocao read(int id) {
         Promocao promocao = null;
 
-        ResultSet rs = DatabaseLocator.getInstance().executarQuery(
+        ResultSet rs = DatabaseMananger.getInstance().executarQuery(
                   "SELECT * FROM promocao "
                 + "WHERE id_promocao =  " + id);
 
@@ -78,7 +78,7 @@ public class PromocaoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PromocaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DatabaseLocator.getInstance().closeResources();
+        DatabaseMananger.getInstance().closeResources();
 
         return promocao;
     }

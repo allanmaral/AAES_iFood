@@ -32,7 +32,7 @@ public class UsuarioDAO {
                 + usuario.getNomeUsuario() + "', '"
                 + usuario.getEmail() + "', '"
                 + usuario.getSenha() + "')";
-        DatabaseLocator.getInstance().executarStatement(comando);
+        DatabaseMananger.getInstance().executarStatement(comando);
 
     }
 
@@ -43,7 +43,7 @@ public class UsuarioDAO {
                 + usuario.getNomeCompleto()
                 + "%'";
 
-        ResultSet rs = DatabaseLocator.getInstance().executarQuery(comando);
+        ResultSet rs = DatabaseMananger.getInstance().executarQuery(comando);
 
         try {
             while (rs.next()) {
@@ -52,7 +52,7 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DatabaseLocator.getInstance().closeResources();
+        DatabaseMananger.getInstance().closeResources();
         
         return email;
     }
@@ -63,7 +63,7 @@ public class UsuarioDAO {
         String comando = "SELECT * FROM usuario "
                 + "WHERE id_usuario = " + idUsuario;
 
-        ResultSet rs = DatabaseLocator.getInstance().executarQuery(comando);
+        ResultSet rs = DatabaseMananger.getInstance().executarQuery(comando);
 
         try {
             if (rs.next()) {
@@ -76,7 +76,7 @@ public class UsuarioDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DatabaseLocator.getInstance().closeResources();
+        DatabaseMananger.getInstance().closeResources();
 
         return usuario;
     }
