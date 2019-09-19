@@ -1,0 +1,30 @@
+  
+<div class="jumbotron text-center" style="margin-bottom:0">
+    <label>Desenvolvido por: </label><br>
+    Douglas Baumgratz de Carvalho<br>
+    Jonas<br>
+    Allan Amaral<br>
+    Aspectos Avançados em Engenharia de Software - UFJF
+</div>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+
+        /*
+         Select2 nos dropdowns
+         */
+
+        $('select').select2({
+            language: "pt-BR",
+            allowClear: true,
+            placeholder: "Selecione ou digite",
+            theme: "bootstrap",
+            width: 'auto',
+            dropdownAutoWidth: true,
+        });
+
+    });
+</script>
+</html>
